@@ -57,7 +57,7 @@ class Profile(models.Model):
         null=True, blank=True, upload_to='user_pics', verbose_name='Аватар')
 
     def __str__(self):
-        return self.user.get_full_name() + "'s Profile"
+        return self.user.username + "'s Profile"
 
     class Meta:
         verbose_name = 'Профиль'

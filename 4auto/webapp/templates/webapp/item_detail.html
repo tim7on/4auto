@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ items.name }}{% endblock title %}
+
+
+{% block content %}
+<div class="overlay hidden">
+    <div class="gridover">
+        <img class="img" src="{{ profile.avatar.url }}" alt="">
+        <div class="txt1">
+            <h2 class="txt2"> @{{ profile.user.first_name }}</h2>
+            <p class="txt2"> <strong>Адрес: </strong>{{ profile.adress}}</p>
+            <p class="txt2"><strong> Расписание: </strong>{{ profile.schedule }}</p>
+        </div>
+
+        <div class="cal">
+            <a class="cal_svg" id="cal_phone" href="tel:+996555705004"></a>
+            <a class="cal_svg" id="cal_insta" href="http://localhost:8000"></a>
+            <a class="cal_svg" id="cal_whats" href="#"></a>
+        </div>
+        <br>
+    </div>
+</div>
+<div class="grid">
+    <div class='ads'>
+        <div>
+            <h1>ADS</h1>
+            <p>blahblahblabhlahb labhalbhalbhla hlabhlahblabhla albhlahbla</p>
+            <br>
+            <p>afkldsanlsfaksdf</p>
+            <p>safjkd;slanfkdsna;fsdn f;adskn fldn;saf</p>
+            <p>safjkd;slanfkdsna;fsdn f;adskn fldn;saf</p>
+            <p>safjkd;slanfkdsna;fsdn f;adskn fldn;saf</p>
+            <p>safjkd;slanfkdsna;fsdn f;adskn fldn;saf</p>
+        </div>
+    </div>
+    <div class="card">
+        {% if item.photo %}
+        <img class="detail_img" src="{{item.photo.url}}" alt="Photo of item">
+        {% else %}
+        <img class="detail_img" src=" {% static 'img/no-image.jpg' %}" style="filter: brightness(0.5);" alt="No Image"
+            srcset="">
+        {% endif %}
+        <div class="info_detail">
+            <h1>{{ item.name }}</h1>
+            <h3>Категория: {{ item.category }}</h3>
+            <p>Теги: Скоро добавлю</p>
+            <p>{{ item.description }}</p>
+            <br>
+            <hr>
+            <br>
+            <p>@{{ item.owner }}</p>
+            <p class="price"> ЦЕНА: <strong>{{ item.price}}</strong></p>
+            <p>{{item.created|date:"d M Y" }}</p>
+        </div>
+        <a id="connect" class="btn_rght">
+            <p>Связаться</p>
+        </a>
+    </div>
+    <div class='ads'>
+        <div>
+            <h1>ADS</h1>
+            <p>blahblahblabhlahb labhalbhalbhla hlabhlahblabhla albhlahbla</p>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+{% block js %}
+<script src="{% static 'js/detailview.js' %}"></script>
+{% endblock js %}

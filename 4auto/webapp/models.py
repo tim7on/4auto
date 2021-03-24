@@ -40,7 +40,8 @@ class Item(models.Model):
     name = models.CharField(verbose_name=_("Название"), max_length=50)
     category = models.ForeignKey(
         "webapp.Category", verbose_name=_("Категории"), on_delete=models.CASCADE)
-    photo = models.ImageField(verbose_name=_("Фото"), upload_to="items_photo", null=True, blank=True)
+    photo = models.ImageField(verbose_name=_(
+        "Фото"), upload_to="items_photo", null=True, blank=True)
 
     description = models.TextField(verbose_name=_("Описание"))
     price = models.DecimalField(verbose_name=_(
@@ -54,3 +55,6 @@ class Item(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('item_view', kwargs={'owner': self.owner, 'pk': self.pk})

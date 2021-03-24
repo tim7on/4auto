@@ -1,0 +1,11 @@
+document.addEventListener('DOMContentLoaded', () => {
+
+    const overlay = document.querySelectorAll('.overlay'),
+        btn = document.querySelector('connect')
+
+    btn.addEventListener('click', (e)=>{
+        e.preventDefault
+        overlay.classList.remove('hidden')
+        console.log('click')
+    });
+});

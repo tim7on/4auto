@@ -25,9 +25,11 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
 
     path('', IndexView.as_view(), name='index'),
-    
+
     path('category/<slug:category>/<slug:subcategory>/',
          CategoryListView.as_view(), name='subcategory'),
     path('category/<slug:subcategory>/',
          CategoryListView.as_view(), name='category'),
+
+    path('<str:owner>/item/<int:pk>/', ItemView.as_view(), name='item_view'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

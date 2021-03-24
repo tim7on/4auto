@@ -3,14 +3,15 @@
 <div class="sidebar">
     <h1>Категории</h1>
     <ul class="root">
+    <hr>
         {% recursetree category %}
         <li>
-            <a href="{{node.get_absolute_url}}">
+            <a class="nav_link"href="{{node.get_absolute_url}}">
                 {{ node.name }}
             </a>
             {% if not node.is_leaf_node %}
             <ul class="children">
-                <a href="#"> {{ children }}</a>
+                <a href="#">{{ children }}</a>
             </ul>
             {% endif %}
         </li>

@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
     <meta charset="UTF-8">
@@ -70,16 +70,8 @@
             </ul>
         </div>
     </nav>
-    <div class="grid">
-        {% block category %}{% endblock category %}
-        {% block content %}{% endblock content %}
-        <div class='ads'>
-            <div>
-                <h1>ADS</h1>
-                <p>blahblahblabhlahb labhalbhalbhla hlabhlahblabhla albhlahbla</p>
-            </div>
-        </div>
-    </div>
+    {% block content %}{% endblock content %}
+    {% block js %}{% endblock js %}
     <footer>
 
     </footer>

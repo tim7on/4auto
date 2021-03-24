@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_list_or_404, get_object_or_404
 from django.views.generic import ListView, DetailView
 from webapp.models import Category, Item
+from accounts.models import Profile
 from django.core.paginator import Paginator, PageNotAnInteger
 from django.utils import timezone
 from django.urls import reverse
@@ -71,4 +72,15 @@ class CategoryListView(ListView):
         context = {'items': items,
                    'category': Category.objects.all()
                    }
+        return context
+
+
+class ItemView(DetailView):
+    model = Item
+    template_name = "webapp/item_detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(ItemView, self).get_context_data(**kwargs)
+        context['profile'] = Profile.objects.get(
+            user__username=self.kwargs['owner'])
         return context
