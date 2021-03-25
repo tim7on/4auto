@@ -375,7 +375,14 @@ img {
     box-shadow: 0 0 0.75rem 0 var(--accent);
     transition: box-shadow ease-out 300ms;
 }
-
+.cal_svg_active{
+    cursor: pointer;
+}
+.cal_svg_none{
+    --accent:var(--Dark);
+    pointer-events: none;
+    cursor: default;
+}
 #cal_phone {
     background-image: url('../svg/cal_phone.svg');
 

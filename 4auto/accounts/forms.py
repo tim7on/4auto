@@ -51,9 +51,8 @@ class MyUserCreationForm(UserCreationForm):
 class UserChangeForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
-        fields = ['first_name', 'last_name', 'email']
-        labels = {'first_name': 'Имя',
-                  'last_name': 'Фамилия', 'email': 'Email'}
+        fields = ['email']
+        labels = {'email': 'Email'}
 
 
 class ProfileChangeForm(forms.ModelForm):
