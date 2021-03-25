@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Пользователь{% endblock %}
+
+{% block menu %}
+{% if request.user.username == profile.username %}
+<li><a href="{% url 'accounts:change' user_obj.pk %}">Редактировать</a></li>
+<li><a href="{% url 'accounts:password_change' %}">Смена пароля</a></li>
+{% endif %}
+{% endblock %}
+{% block content %}
+<div class="grid">
+    <div class='ads'>
+        <div>
+            <h1>ADS</h1>
+            <p>blahblahblabhlahb labhalbhalbhla hlabhlahblabhla albhlahbla</p>
+        </div>
+    </div>
+    <div class="grid_user_detail">
+        <div class="profile">
+            <div class="gridprofile">
+
+                <img class="img" src="{{ profile.avatar.url  }}" alt="">
+                <div class="txt1">
+                    <h2 class="txt2">@{{ profile.user.username }}</h2>
+                    <p class="txt2"><strong>Адрес: </strong>{{ profile.adress}}</p>
+                    <p class="txt2"><strong> Расписание: </strong>{{ profile.schedule }}</p>
+                </div>
+
+                <div class="cal">
+                    <a class="cal_svg{% if profile.phone %} cal_svg_active {% else %} cal_svg_none {% endif %}"
+                        id="cal_phone" href="tel:{{ profile.phone }}" target="_blank" rel="noopener noreferrer"></a>
+                    <a class="cal_svg{% if profile.insta %} cal_svg_active {% else %} cal_svg_none {% endif %}"
+                        id="cal_insta" href="https://instagram.com/{{ profile.insta }}" target="_blank"
+                        rel="noopener noreferrer"></a>
+                    <a class="cal_svg{% if profile.whats %} cal_svg_active {% else %} cal_svg_none {% endif %}"
+                        id="cal_whats" href="https://wa.me/{{ profile.whats }}" target="_blank"
+                        rel="noopener noreferrer"></a>
+                </div>
+                <br>
+            </div>
+        </div>
+        {% include 'partial/items.html' %}
+
+    </div>
+    <div class='ads'>
+        <div>
+            <h1>ADS</h1>
+            <p>blahblahblabhlahb labhalbhalbhla hlabhlahblabhla albhlahbla</p>
+        </div>
+    </div>
+</div>
+{% endblock content %}

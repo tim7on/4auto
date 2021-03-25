@@ -116,3 +116,17 @@ class ItemView(DetailView):
         context['profile'] = Profile.objects.get(
             user__username=self.kwargs['owner'])
         return context
+
+
+class ProfileDetailView(DetailView):
+    model = Profile
+    template_name = "webapp/profile.html"
+
+    def get_object(self, queryset=None):
+        return Profile.objects.get(user__username=self.kwargs.get("username"))
+
+    def get_context_data(self, **kwargs):
+        context = super(ProfileDetailView, self).get_context_data(**kwargs)
+        context['items'] = Item.objects.filter(
+            owner__username=self.kwargs['username'])
+        return context

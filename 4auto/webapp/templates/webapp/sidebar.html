@@ -3,8 +3,8 @@
 <div class="sidebar">
     <h1>Категории</h1>
     <ul class="root">
-        <hr>
         <li>
+            <hr>
             {% url 'all' as all_url %}
             {% if  all_url == request.path %}
             <a class="nav_active" href="{% url 'all' %}">

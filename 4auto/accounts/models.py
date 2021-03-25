@@ -7,6 +7,7 @@ from django.utils.timezone import now
 from datetime import timedelta
 from django.core.validators import RegexValidator
 from django.utils.translation import ugettext_lazy as _
+from django.urls import reverse
 
 User._meta.get_field('email')._unique = True
 User._meta.get_field('email').blank = False
@@ -72,8 +73,11 @@ class Profile(models.Model):
         validators=[insta_regex], verbose_name="Instagram", max_length=31, blank=True, null=True)
 
     def __str__(self):
-        return self.user.username + "'s Profile"
+        return self.user.username + "Профиль"
 
     class Meta:
         verbose_name = 'Профиль'
         verbose_name_plural = 'Профили'
+
+    def get_absolute_url(self):
+        return reverse('profile', kwargs={'username': self.user.username})

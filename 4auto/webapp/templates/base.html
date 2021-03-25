@@ -66,7 +66,7 @@
                 <li><a href="#" class='nav_link'>Поиск</a></li>
                 
                 {% if request.user.is_authenticated %}
-                <li><a href="{% url 'accounts:detail' request.user.pk %}" class='nav_link'>Аккаунт</a></li>
+                <li><a href="#" class='nav_link'>Аккаунт</a></li>
                 {% else %}
                 <li><a href="#" class='nav_link'>Регистрация</a></li>
                 {% endif %}

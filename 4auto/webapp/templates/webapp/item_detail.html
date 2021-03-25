@@ -5,23 +5,27 @@
 
 {% block content %}
 <div class="overlay hidden">
-    <div class="gridover">
-        <img class="img" src="{{ profile.avatar.url }}" alt="">
-        <div class="txt1">
-            <h2 class="txt2"> @{{ profile.user.username }}</h2>
-            <p class="txt2"> <strong>Адрес: </strong>{{ profile.adress}}</p>
-            <p class="txt2"><strong> Расписание: </strong>{{ profile.schedule }}</p>
-        </div>
+    <div class="profile" style="max-width:30rem;">
+        <div class="gridprofile">
+            <img class="img" src="{{ profile.avatar.url }}" alt="">
+            <div class="txt1">
+                <h2 class="txt2"> @{{ profile.user.username }}</h2>
+                <p class="txt2"> <strong>Адрес: </strong>{{ profile.adress}}</p>
+                <p class="txt2"><strong> Расписание: </strong>{{ profile.schedule }}</p>
+            </div>
 
-        <div class="cal">
-            <a class="cal_svg{% if profile.phone %} cal_svg_active {% else %} cal_svg_none {% endif %}" id="cal_phone"
-                href="tel:{{ profile.phone }}" target="_blank" rel="noopener noreferrer"></a>
-            <a class="cal_svg{% if profile.insta %} cal_svg_active {% else %} cal_svg_none {% endif %}" id="cal_insta"
-                href="https://instagram.com/{{ profile.insta }}" target="_blank" rel="noopener noreferrer"></a>
-            <a class="cal_svg{% if profile.whats %} cal_svg_active {% else %} cal_svg_none {% endif %}" id="cal_whats"
-                href="https://wa.me/{{ profile.whats }}" target="_blank" rel="noopener noreferrer"></a>
+            <div class="cal">
+                <a class="cal_svg{% if profile.phone %} cal_svg_active {% else %} cal_svg_none {% endif %}"
+                    id="cal_phone" href="tel:{{ profile.phone }}" target="_blank" rel="noopener noreferrer"></a>
+                <a class="cal_svg{% if profile.insta %} cal_svg_active {% else %} cal_svg_none {% endif %}"
+                    id="cal_insta" href="https://instagram.com/{{ profile.insta }}" target="_blank"
+                    rel="noopener noreferrer"></a>
+                <a class="cal_svg{% if profile.whats %} cal_svg_active {% else %} cal_svg_none {% endif %}"
+                    id="cal_whats" href="https://wa.me/{{ profile.whats }}" target="_blank"
+                    rel="noopener noreferrer"></a>
+            </div>
+            <br>
         </div>
-        <br>
     </div>
 </div>
 <div class="grid">

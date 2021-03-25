@@ -57,15 +57,15 @@ class RegisterActivateView(View):
         login(self.request, user)
 
 
-class UserDetailView(LoginRequiredMixin, DetailView):
-    model = get_user_model()
-    template_name = 'user_detail.html'
-    context_object_name = 'user_obj'
-    paginate_related_by = 5
-    paginate_related_orphans = 0
+# class UserDetailView(LoginRequiredMixin, DetailView):
+#     model = get_user_model()
+#     template_name = 'user_detail.html'
+#     context_object_name = 'user_obj'
+#     paginate_related_by = 5
+#     paginate_related_orphans = 0
 
-    def get_context_data(self, **kwargs):
-        return super().get_context_data(**kwargs)
+#     def get_context_data(self, **kwargs):
+#         return super().get_context_data(**kwargs)
 
 
 class UserChangeView(UserPassesTestMixin, UpdateView):
@@ -161,7 +161,3 @@ class UserPasswordResetView(UpdateView):
 
     def get_token(self):
         return AuthToken.get_token(self.kwargs.get('token'))
-
-# class ProfileEditView(UpdateView):
-#     model = Profile
-#     form_class =
