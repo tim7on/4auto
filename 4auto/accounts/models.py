@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractUser
 from django.utils.timezone import now
 from datetime import timedelta
+from django.core.validators import RegexValidator
 from django.utils.translation import ugettext_lazy as _
 
 User._meta.get_field('email')._unique = True
@@ -48,13 +49,27 @@ class AuthToken(models.Model):
 
 
 class Profile(models.Model):
+    phone_regex = RegexValidator(
+        regex=r'^\+?1?\d{12,15}$', message="Телефон должен быть в формате: '+996XXXXXXXXX'.")
+    insta_regex = RegexValidator(
+        regex=r'(?:@)([A-Za-z0-9_](?:(?:[A-Za-z0-9_]|(?:\.(?!\.))){0,28}(?:[A-Za-z0-9_]))?)'
+    )
+
     user: AbstractUser = models.OneToOneField(get_user_model(), related_name='profile',
                                               on_delete=models.CASCADE, verbose_name='Пользователь')
 
-    adress = models.CharField(max_length=50, verbose_name=_("Адрес"), null=True, blank=True)
-    schedule = models.CharField(max_length=50, verbose_name=_("Расписание"), null=True, blank=True)
+    adress = models.CharField(
+        max_length=50, verbose_name=_("Адрес"), null=True, blank=True)
+    schedule = models.CharField(max_length=50, verbose_name=_(
+        "Расписание"), null=True, blank=True)
     avatar = models.ImageField(
-        null=True, blank=True, upload_to='user_pics', verbose_name='Аватар')
+        null=True, blank=True, upload_to='user_pics', verbose_name=_("Аватар"))
+    phone = models.CharField(
+        validators=[phone_regex], verbose_name="Телефон", max_length=16, blank=True, null=True)
+    whats = models.CharField(
+        validators=[phone_regex], verbose_name="Whatsapp", max_length=16, blank=True, null=True)
+    insta = models.CharField(
+        validators=[insta_regex], verbose_name="Instagram", max_length=31, blank=True, null=True)
 
     def __str__(self):
         return self.user.username + "'s Profile"
