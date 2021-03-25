@@ -1,20 +1,45 @@
-{% load mptt_tags %}
+{% extends 'base.html' %}
+{% load static %}
 
-<div class="sidebar">
-    <h1>Категории</h1>
-    <ul class="root">
-    <hr>
-        {% recursetree category %}
-        <li>
-            <a class="nav_link"href="{{node.get_absolute_url}}">
-                {{ node.name }}
-            </a>
-            {% if not node.is_leaf_node %}
-            <ul class="children">
-                <a href="#">{{ children }}</a>
-            </ul>
+
+{% block content %}
+<div class="grid">
+    {% include 'webapp/sidebar.html' %}
+    <div class="content_grid">
+
+        {% for item in items %}
+        <div class="card">
+            {% if item.photo %}
+            <img class="card_img"src="{{item.photo.url}}" alt="Photo of item">
+            {% else %}
+            <img class="card_img"src=" {% static 'img/no-image.jpg' %}" style="filter: brightness(0.5);" alt="No Image" srcset="">
             {% endif %}
-        </li>
-        {% endrecursetree %}
-    </ul>
+            <div class="info">
+                <h1>{{ item.name }}</h1>
+                <h3>Категория: {{ item.category }}</h3>
+                <p>Теги: Скоро добавлю</p>
+                <p>{{ item.description|truncatewords:15 }}</p>
+                <br>
+                <p>@{{ item.owner }}</p>
+                <p class="price"> ЦЕНА: <strong>{{ item.price}}</strong></p>
+                <p>{{item.created|date:"d M Y" }}</p>
+            </div>
+            <a href="{{ item.get_absolute_url }}" class="btn_rght">
+                <p>Подробнее</p>
+            </a>
+        </div>
+        {% endfor %}
+
+    </div>
+    {% if items.paginator.num_pages != 1 %}
+    {% include 'partial/pagination.html' %}
+    {% endif %}
+
+    <div class='ads area_top'>
+        <div>
+            <h1>ADS</h1>
+            <p>blahblahblabhlahb labhalbhalbhla hlabhlahblabhla albhlahbla</p>
+        </div>
+    </div>
 </div>
+{% endblock content %}

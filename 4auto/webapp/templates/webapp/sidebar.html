@@ -1,0 +1,41 @@
+{% load mptt_tags %}
+
+<div class="sidebar">
+    <h1>Категории</h1>
+    <ul class="root">
+        <hr>
+        <li>
+            {% url 'all' as all_url %}
+            {% if  all_url == request.path %}
+            <a class="nav_active" href="{% url 'all' %}">
+                Все
+            </a>
+            {% else %}
+            <a class="nav_link" href="{% url 'all' %}">
+                Все
+            </a>
+            {% endif %}
+        </li>
+        {% recursetree category %}
+        <li>
+
+            {% if node.get_absolute_url == request.path %}
+            <a class="nav_active" href="{{node.get_absolute_url}}">
+                {{ node.name }}
+            </a>
+            {% else %}
+            <a class="nav_link" href="{{node.get_absolute_url}}">
+                {{ node.name }}
+            </a>
+            {% endif %}
+
+
+            {% if not node.is_leaf_node %}
+            <ul class="children">
+                <a href="#">{{ children }}</a>
+            </ul>
+            {% endif %}
+        </li>
+        {% endrecursetree %}
+    </ul>
+</div>

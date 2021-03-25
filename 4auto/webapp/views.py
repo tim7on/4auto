@@ -42,12 +42,44 @@ class IndexView(ListView):
         return context
 
 
+class AllCategory(ListView):
+    '''
+    HomePage of website
+    '''
+
+    model = Item
+    template_name = 'webapp/category.html'
+    paginate_by = 6
+
+    def get_queryset(self):
+        queryset = Item.objects.all()
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super(AllCategory, self).get_context_data(**kwargs)
+        items = self.get_queryset()
+        paginator = Paginator(items, self.paginate_by)
+
+        page = self.request.GET.get('page')
+        try:
+            items = paginator.page(page)
+        except PageNotAnInteger:
+            items = paginator.page(1)
+        except EmptyPage:
+            items = paginator.page(paginator.num_pages)
+
+        context = {'items': items,
+                   'category': Category.objects.all()
+                   }
+        return context
+
+
 class CategoryListView(ListView):
     '''
     Category views, with request filtration
     '''
     model = Item
-    template_name = 'webapp/index.html'
+    template_name = 'webapp/category.html'
     paginate_by = 6
 
     def get_queryset(self):

@@ -1,4 +1,5 @@
 :root {
+    --Dark: #131A22;
     --lightDark: #232F3E;
     --Background: #36465a;
     --light: #E2E5E9;
@@ -10,6 +11,7 @@
     font-family: 'Roboto', sans-serif;
     margin: 0em;
     padding: 0em;
+
 }
 
 *,
@@ -347,13 +349,19 @@ img {
 }
 
 .cal_svg {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background-repeat: no-repeat;
+    background-size: 2rem;
+    background-position: center;
+    box-shadow: 0 0 0 0 var(--accent);
+    transition: box-shadow ease-in 300ms;
 }
-
+.cal_svg:hover {
+    box-shadow: 0 0 0.75rem 0 var(--accent);
+    transition: box-shadow ease-out 300ms;
+}
 #cal_phone {
     background-image: url('../svg/cal_phone.svg');
+
 }
 
 #cal_insta {

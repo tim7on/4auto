@@ -25,7 +25,7 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
 
     path('', IndexView.as_view(), name='index'),
-
+    path('category/', AllCategory.as_view(), name='all'),
     path('category/<slug:category>/<slug:subcategory>/',
          CategoryListView.as_view(), name='subcategory'),
     path('category/<slug:subcategory>/',
