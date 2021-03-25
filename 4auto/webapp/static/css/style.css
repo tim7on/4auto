@@ -495,13 +495,6 @@ img {
 }
 
 @media (min-width: 1600px) {
-    .grid {
-        position: relative;
-        max-width: 100%;
-        display: grid;
-        grid-template-columns: 220px auto 280px;
-    }
-
     .content_grid {
         grid-template-columns: repeat(3, 1fr);
         justify-content: center;
