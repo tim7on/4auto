@@ -193,6 +193,7 @@ img {
 .scroll_horizontal {
     margin: 0 1rem;
     overflow-x: scroll;
+    scroll-behavior: smooth;
 
 }
 /* width */
