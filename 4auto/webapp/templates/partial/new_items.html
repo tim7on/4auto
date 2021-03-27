@@ -1,6 +1,6 @@
 {% load static %}
 {% for item in new_items  %}
-<div class="card">
+<div class="new_card">
     {% if item.photo %}
     <img class="card_img" src="{{item.photo.url}}" alt="Photo of item">
     {% else %}
@@ -8,12 +8,11 @@
         srcset="">
     {% endif %}
     <div class="info_detail">
-        <h1>{{ item.name|truncatechars:20 }}</h1>
-        <h3>Категория: {{ item.category }}</h3>
-        <p>{{ item.description|truncatechars:75 }}</p>
-        <br>
-        <br>
-        <p class="price"> ЦЕНА: <strong>{{ item.price}}</strong></p>
+        <h2 class="info_detail_txt ">{{ item.name|truncatechars:15 }}</h2>
+        <h3 class="info_detail_txt ">Категория: {{ item.category }}</h3>
+        <p class="info_detail_txt ">{{ item.description|truncatechars:75 }}</p>
+        <br class="info_detail_txt ">
+        <p  class="info_detail_txt price"> ЦЕНА: <strong>{{ item.price}}</strong></p>
     </div>
     <a href="{{ item.get_absolute_url }}" class="btn_rght">
         <p>Подробнее</p>

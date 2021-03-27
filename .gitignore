@@ -11,3 +11,4 @@ uploads
 settings_local.py
 .env
 items_photo
+user_pics

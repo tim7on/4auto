@@ -190,6 +190,30 @@ img {
     gap: 1rem;
 }
 
+.scroll_horizontal {
+    margin: 0 1rem;
+    overflow-x: scroll;
+
+}
+/* width */
+.scroll_horizontal::-webkit-scrollbar {
+    height: 0rem;
+    width: 0rem;
+}
+.horizontal_grid {
+    margin: 1rem 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 2rem));
+    align-items: baseline;
+    justify-content: start;
+    gap: 1rem;
+}
+
+.horizontal_grid .card {
+    min-width: 15rem;
+    min-height: 15rem;
+}
+
 .col1 {
     margin: auto;
     display: grid;
@@ -211,15 +235,44 @@ img {
 }
 
 .card {
+    min-height: 20rem;
     position: relative;
     color: var(--light);
     background-color: var(--lightDark);
     border-radius: 1rem;
 }
 
+.new_card {
+    min-height: 10rem;
+    min-width: 10rem;
+    position: relative;
+    color: var(--light);
+    background-color: var(--lightDark);
+    border-radius: 1rem;
+}
 
-.info_top {
-    align-self: baseline;
+.new_card .card_img {
+    pointer-events: none;
+    position: absolute;
+    opacity: 0.25;
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+    z-index: 0;
+
+}
+
+.info_detail_txt {
+    z-index: 1;
+}
+
+.new_card .info_detail {
+    opacity: 1;
+    min-height: 10rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem;
 }
 
 .card_img {
@@ -230,7 +283,7 @@ img {
 
 .detail_img {
     border-radius: 1rem 1rem 0rem 0rem;
-    height: 20rem;
+    height: 25rem;
     width: 100%;
 }
 
@@ -242,8 +295,10 @@ img {
 }
 
 .info_detail {
+    min-height: 5rem;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     padding: 1rem;
 }
 
@@ -252,6 +307,7 @@ img {
 }
 
 .price {
+    width: max-content;
     color: var(--accent);
 }
 
@@ -506,14 +562,13 @@ img {
     }
 
     .card {
+        min-height: 20rem;
         width: 100%;
     }
 
     .info_detail {
-        display: flex;
-        flex-direction: column;
-        height: 13rem;
         justify-content: space-between;
+        height: auto;
         padding: 1rem;
     }
 
@@ -530,10 +585,10 @@ img {
         height: 15rem;
     }
 
-    .card img {
+    /* .card img {
         position: relative;
         height: 10rem;
-    }
+    } */
 
     .sidebar {
         justify-self: baseline;

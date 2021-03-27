@@ -25,6 +25,7 @@ class IndexView(ListView):
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
         items = self.get_queryset()
+        new_items = Item.objects.all().order_by('-created')[:6]
         paginator = Paginator(items, self.paginate_by)
 
         page = self.request.GET.get('page')
@@ -37,6 +38,7 @@ class IndexView(ListView):
             items = paginator.page(paginator.num_pages)
 
         context = {'items': items,
+                   'new_items': new_items,
                    'category': Category.objects.all()
                    }
         return context
