@@ -44,7 +44,7 @@ class IndexView(ListView):
 
 class AllCategory(ListView):
     '''
-    HomePage of website
+    Catregory: 'All' of website
     '''
 
     model = Item
@@ -57,7 +57,7 @@ class AllCategory(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(AllCategory, self).get_context_data(**kwargs)
-        items = self.get_queryset()
+        items = self.get_queryset().order_by('-created')
         paginator = Paginator(items, self.paginate_by)
 
         page = self.request.GET.get('page')
@@ -85,11 +85,12 @@ class CategoryListView(ListView):
     def get_queryset(self):
         queryset = Item.objects.filter(Q(category__slug=self.kwargs.get(
             'subcategory')) | Q(category__parent__slug=self.kwargs.get('subcategory')))
+        print(queryset)
         return queryset
 
     def get_context_data(self, **kwargs):
         context = super(CategoryListView, self).get_context_data(**kwargs)
-        items = self.get_queryset().order_by('created')
+        items = self.get_queryset().order_by('-created')
         paginator = Paginator(items, self.paginate_by)
 
         page = self.request.GET.get('page')
@@ -107,14 +108,17 @@ class CategoryListView(ListView):
         return context
 
 
-class ItemView(DetailView):
+class ItemDetailView(DetailView):
+    ''' DetailView of Item '''
     model = Item
     template_name = "webapp/item_detail.html"
 
     def get_context_data(self, **kwargs):
-        context = super(ItemView, self).get_context_data(**kwargs)
+        context = super(ItemDetailView, self).get_context_data(**kwargs)
         context['profile'] = Profile.objects.get(
             user__username=self.kwargs['owner'])
+        context['new_items'] = Item.objects.exclude(
+            id=self.kwargs['pk']).order_by('-created')[:3]
         return context
 
 

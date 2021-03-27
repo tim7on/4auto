@@ -5,6 +5,7 @@
     <ul class="root">
         <li>
             <hr>
+            <br>
             {% url 'all' as all_url %}
             {% if  all_url == request.path %}
             <a class="nav_active" href="{% url 'all' %}">
@@ -28,7 +29,6 @@
                 {{ node.name }}
             </a>
             {% endif %}
-
 
             {% if not node.is_leaf_node %}
             <ul class="children">

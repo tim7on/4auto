@@ -1,4 +1,33 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}{{ items.name }}{% endblock title %}
-{% block content %}empty{% endblock content %}
+{% block content %}
+<div>
+    <h2>Новинки</h2>
+    <div>
+        {% for item in new_items  %}
+        <div class="card">
+            {% if item.photo %}
+            <img class="card_img" src="{{item.photo.url}}" alt="Photo of item">
+            {% else %}
+            <img class="card_img" src=" {% static 'img/no-image.jpg' %}" style="filter: brightness(0.5);" alt="No Image"
+                srcset="">
+            {% endif %}
+            <div class="info">
+                <h1>{{ item.name|truncatechars:20 }}</h1>
+                <h3>Категория: {{ item.category }}</h3>
+                <p>Теги: Скоро добавлю</p>
+                <p>{{ item.description|truncatechars:50 }}</p>
+                <br>
+                <a class="link" href="{{ item.owner.profile.get_absolute_url }}">@{{ item.owner }}</a>
+                <p class="price"> ЦЕНА: <strong>{{ item.price}}</strong></p>
+                <p>{{item.created|date:"d M Y" }}</p>
+            </div>
+            <a href="{{ item.get_absolute_url }}" class="btn_rght">
+                <p>Подробнее</p>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

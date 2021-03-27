@@ -25,12 +25,12 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
 
     path('', IndexView.as_view(), name='index'),
-    path('u/<slug:username>', ProfileDetailView.as_view(), name='profile'),
+    path('u/<slug:username>/', ProfileDetailView.as_view(), name='profile'),
     path('category/', AllCategory.as_view(), name='all'),
     path('category/<slug:category>/<slug:subcategory>/',
          CategoryListView.as_view(), name='subcategory'),
     path('category/<slug:subcategory>/',
          CategoryListView.as_view(), name='category'),
 
-    path('<str:owner>/item/<int:pk>/', ItemView.as_view(), name='item_view'),
+    path('u/<str:owner>/item/<int:pk>/', ItemDetailView.as_view(), name='item_view'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

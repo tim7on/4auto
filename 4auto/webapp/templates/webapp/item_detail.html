@@ -41,28 +41,35 @@
             <p>safjkd;slanfkdsna;fsdn f;adskn fldn;saf</p>
         </div>
     </div>
-    <div class="card">
-        {% if item.photo %}
-        <img class="detail_img" src="{{item.photo.url}}" alt="Photo of item">
-        {% else %}
-        <img class="detail_img" src=" {% static 'img/no-image.jpg' %}" style="filter: brightness(0.5);" alt="No Image"
-            srcset="">
-        {% endif %}
-        <div class="info_detail">
-            <h1>{{ item.name }}</h1>
-            <h3>Категория: {{ item.category }}</h3>
-            <p>Теги: Скоро добавлю</p>
-            <p>{{ item.description }}</p>
-            <br>
-            <hr>
-            <br>
-            <p>@{{ item.owner }}</p>
-            <p class="price"> ЦЕНА: <strong>{{ item.price}}</strong></p>
-            <p>{{item.created|date:"d M Y" }}</p>
+    <div class="col2_grid">
+        <div class="card" style="margin: 0 auto;">
+            {% if item.photo %}
+            <img class="detail_img" src="{{item.photo.url}}" alt="Photo of item">
+            {% else %}
+            <img class="detail_img" src=" {% static 'img/no-image.jpg' %}" style="filter: brightness(0.5);"
+                alt="No Image" srcset="">
+            {% endif %}
+            <div class="info_detail">
+                <h1>{{ item.name }}</h1>
+                <h3>Категория: {{ item.category }}</h3>
+                <p>Теги: Скоро добавлю</p>
+                <p>{{ item.description }}</p>
+                <br>
+                <hr>
+                <br>
+                <p class="price"> ЦЕНА: <strong>{{ item.price}}</strong></p>
+                <p>{{item.created|date:"d M Y" }}</p>
+            </div>
+            <a id="connect" class="btn_rght">
+                <p>Связаться</p>
+            </a>
         </div>
-        <a id="connect" class="btn_rght">
-            <p>Связаться</p>
-        </a>
+        <div style='align-self: baseline; margin: auto;'>
+            <h1 class="accent"style="margin-bottom:1rem; display:block;">Новинки</h1>
+            <div class="col1">
+                {% include 'partial/new_items.html' %}
+            </div>
+        </div>
     </div>
     <div class='ads'>
         <div>
