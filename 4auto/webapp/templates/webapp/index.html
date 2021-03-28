@@ -2,7 +2,9 @@
 {% load static %}
 {% block title %}{{ items.name }}{% endblock title %}
 {% block content %}
-<div>
+<div class="search_overlay"><input type="search" name="Поиск" placeholder="Введите слово для поиска" id="main_search">
+</div>
+<div class="new_content">
     <h2>Новинки</h2>
     <div class="scroll_horizontal">
         <div class='horizontal_grid'>

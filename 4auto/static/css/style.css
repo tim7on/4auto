@@ -28,6 +28,7 @@ body {
     margin: 0px;
     padding: 0px;
     background-color: var(--lightTrans);
+    scroll-behavior: smooth;
 }
 
 nav {
@@ -109,6 +110,10 @@ img {
     margin: auto;
 }
 
+.accent {
+    color: var(--lightDark);
+}
+
 .link {
     width: max-content;
     color: var(--light);
@@ -161,9 +166,9 @@ img {
 .grid {
     justify-items: center;
     align-items: center;
-    margin: 1rem;
+    margin: 1rem auto;
     display: grid;
-    max-width: 95%;
+    max-width: 90%;
     grid-template-columns: repeat(1, 1fr);
     gap: 1rem;
 }
@@ -186,15 +191,90 @@ img {
     gap: 1rem;
 }
 
+.scroll_horizontal {
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+
+}
+/* width */
+.scroll_horizontal::-webkit-scrollbar {
+    height: 0rem;
+    width: 0rem;
+}
+.horizontal_grid {
+    margin: 1rem 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 2rem));
+    align-items: baseline;
+    justify-content: start;
+    gap: 0.75rem;
+}
+
+.horizontal_grid .card {
+    min-width: 15rem;
+    min-height: 15rem;
+}
+
+.col1 {
+    margin: auto;
+    display: grid;
+    justify-content: center;
+    width: 100%;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+    gap: 1rem;
+}
+
+.col2_grid {
+    margin: auto;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1rem;
+}
+
 .card {
+    min-height: 20rem;
     position: relative;
-    width: 90%;
     color: var(--light);
     background-color: var(--lightDark);
     border-radius: 1rem;
 }
 
+.new_card {
+    min-height: 10rem;
+    min-width: 10rem;
+    position: relative;
+    color: var(--light);
+    background-color: var(--lightDark);
+    border-radius: 1rem;
+}
 
+.new_card .card_img {
+    pointer-events: none;
+    position: absolute;
+    opacity: 0.35;
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+    z-index: 0;
+
+}
+
+.info_detail_txt {
+    z-index: 1;
+}
+
+.new_card .info_detail {
+    opacity: 1;
+    min-height: 10rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem;
+}
 
 .card_img {
     border-radius: 1rem 1rem 0rem 0rem;
@@ -204,22 +284,22 @@ img {
 
 .detail_img {
     border-radius: 1rem 1rem 0rem 0rem;
-    height: 20rem;
+    height: 25rem;
     width: 100%;
 }
 
 .info {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     padding: 1rem;
 
 }
 
 .info_detail {
+    min-height: 5rem;
     display: flex;
     flex-direction: column;
-    min-height: 15rem;
+    justify-content: space-between;
     padding: 1rem;
 }
 
@@ -228,6 +308,7 @@ img {
 }
 
 .price {
+    width: max-content;
     color: var(--accent);
 }
 
@@ -254,7 +335,7 @@ img {
 .sidebar {
     justify-self: center;
     align-self: flex-start;
-    width: 90%;
+    width: 100%;
     background-color: var(--lightDark);
     color: var(--light);
     border-radius: 1rem;
@@ -278,17 +359,13 @@ img {
 }
 
 .ads {
-    width: 90%;
+    width: 100%;
     height: 100%;
     background: var(--accent);
     justify-content: center;
     border-radius: 1rem;
 
 
-}
-
-.area_top {
-    grid-area: 1/1;
 }
 
 .ads div {
@@ -328,8 +405,8 @@ img {
 
 .profile {
     position: relative;
-    width: 90%;
-    max-width: 60rem;
+    width: 100%;
+    max-width: 70rem;
     border-radius: 1rem;
     background-color: var(--lightDark);
     color: var(--light);
@@ -486,23 +563,33 @@ img {
     }
 
     .card {
+        min-height: 20rem;
         width: 100%;
+    }
+
+    .info_detail {
+        justify-content: space-between;
+        height: auto;
+        padding: 1rem;
     }
 
     .profile {
         width: 100%;
     }
 
+    .col1 {
+        grid-template-columns: repeat(2, 1fr);
+    }
 
     .info {
         justify-content: space-between;
         height: 15rem;
     }
 
-    .card img {
+    /* .card img {
         position: relative;
         height: 10rem;
-    }
+    } */
 
     .sidebar {
         justify-self: baseline;
@@ -510,10 +597,22 @@ img {
 
     .grid {
         position: relative;
+        margin: 1rem;
         max-width: 100%;
         display: grid;
         grid-template-columns: 220px auto 280px;
     }
+
+    /* .col2_grid {
+        margin: auto;
+        display: grid;
+        justify-content: center;
+        align-items: flex-start;
+        width: 100%;
+        grid-template-columns: 70% 30%;
+        gap: 0.75rem;
+
+    } */
 
     .grid_user_detail {
 
@@ -542,5 +641,9 @@ img {
     .profile {
         grid-area: 1 / 1 / 1 / span 3;
 
+    }
+
+    .col1 {
+        grid-template-columns: repeat(3, 1fr);
     }
 }

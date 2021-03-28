@@ -17,7 +17,7 @@
 <body>
     <nav>
         <div class="navgrid">
-            <a href="{% url 'index' %}" id="SVG_a">
+            <a href="{% url 'index' %}" alt="LogoType and home page of site" id="SVG_a">
                 <svg id="SVG_logo" width="52" height="30" viewBox="0 0 52 38" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <g id="Logotype">
@@ -60,21 +60,25 @@
                 </svg>
             </a>
             <div class="menu">
-                <h1 style="color:white;">#</h1>
+                <a id='toggle_menu'>Menu</a>
             </div>
-            <ul class="ulgrid">
-                <li><a href="#" class='nav_link'>Поиск</a></li>
-                <li><a href=" {% url 'all' %}" class="nav_link">Каталог</a></li>
-                {% if request.user.is_authenticated %}
-                <li><a href="{% url 'profile' request.user.username %}" class='nav_link'>Профиль</a></li>
-                {% else %}
-                <li><a href="#" class='nav_link'>Регистрация</a></li>
-                {% endif %}
-                <li><a href="#" class='nav_link'>О нас</a></li>
-            </ul>
+            <div class="ulgrid" id='menu_wrap'>
+                <ul class="menu_ul">
+                    <li><a href="#" class='nav_link'>Поиск</a></li>
+                    <li><a href=" {% url 'all' %}" class="nav_link">Каталог</a></li>
+                    {% if request.user.is_authenticated %}
+                    <li><a href="{% url 'profile' request.user.username %}" class='nav_link'>Профиль</a></li>
+                    {% else %}
+                    <li><a href="#" class='nav_link'>Регистрация</a></li>
+                    {% endif %}
+                    <li><a href="#" class='nav_link'>О нас</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
     {% block content %}{% endblock content %}
+
+    <script src="{% static 'js/navbar.js' %}"></script>
     {% block js %}{% endblock js %}
     <footer>
 
