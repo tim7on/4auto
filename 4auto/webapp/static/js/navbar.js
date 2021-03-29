@@ -5,29 +5,37 @@ document.addEventListener('DOMContentLoaded', () => {
         navwrap = document.querySelector('nav');
 
     function hideMenu(e) {
-        menu.classList.remove('show');
-        // menu.classList.add('ulgrid');
+        e.preventDefault;
+        menu.className = menu.className !== 'show' ? 'show' : 'hide';
+        setTimeout(function () {
+            menu.style.display = 'none';
+        }, 500);
 
     }
     btn.addEventListener('click', (e) => {
-        e.preventDefault;
-        target = e.target;
-        menu.classList.add('show');
-
+        menu.className = menu.className !== 'show' ? 'show' : 'hide';
+        if (menu.className === 'show') {
+            setTimeout(function () {
+                menu.style.display = 'block';
+            }, 0); // timed to occur immediately
+        }
+        if (menu.className === 'hide') {
+            setTimeout(function () {
+                menu.style.display = 'none';
+            }, 500); // timed to match animation-duration
+        }
     });
-
     menu.addEventListener('mouseout', e => {
         console.log('mouse out')
         if (!menu.matches(':hover')) {
-            console.log('If working')
-            setTimeout(hideMenu(e), 100);
+            hideMenu(e);
         }
     });
-    document.addEventListener('touchstart', (e) => {
-        if (e.target !== navwrap && !navwrap.contains(e.target)) {
-            e.preventDefault;
-            console.log(e.target);
-            setTimeout(hideMenu(e), 100);
+    document.addEventListener('touchend', (e) => {
+        if (menu.className === 'show') {
+            if (e.target !== navwrap && !navwrap.contains(e.target)) {
+                hideMenu(e);
+            }
         }
     });
 });

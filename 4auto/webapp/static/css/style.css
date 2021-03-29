@@ -128,7 +128,10 @@ img {
 
 .navgrid {
     display: grid;
-    padding: 0.5rem 2rem;
+    /* padding: 0.5rem 2rem; */
+    width: 90%;
+    padding: 0.5rem 0;
+    margin: 0 auto;
     grid-template-columns: 3rem 1fr;
     height: 3rem;
     justify-items: end;
@@ -202,17 +205,8 @@ img {
 }
 
 
-.ulgrid {
-    display: none;
-    align-items: center;
+#menu_wrap {
     padding-right: 1rem;
-    box-shadow: 0 0 0 0 #131a22a6 !important;
-    transition: box-shadow ease-in 0.2s;
-}
-
-
-.show {
-    display: block;
     position: fixed;
     border-radius: 0 0 0 1rem;
     top: 4rem;
@@ -224,20 +218,94 @@ img {
     width: 50%;
     background-color: var(--lightDark);
     box-shadow: 0 0.5rem 0.75rem 0 #131a22a6 !important;
-    transition: box-shadow ease-in 0.2s;
-
 }
 
-.show #hide_menu {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 1rem 1.5rem;
-    border-radius: 0 1rem 0 1rem;
-    background-color: var(--accent);
+/*  animation of menu */
+@-webkit-keyframes in {
+    0% {
+        -webkit-transform: translateY(-5rem);
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    15% {
+        opacity: 0;
+    }
+
+    100% {
+        -webkit-transform: translateY(0rem);
+        opacity: 1;
+        visibility: visible;
+    }
 }
 
-.show ul {
+@keyframes in {
+    0% {
+        transform: translateY(-5rem);
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    15% {
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+@-webkit-keyframes out {
+    0% {
+        -webkit-transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    70% {
+        opacity: 0;
+    }
+
+    100% {
+        -webkit-transform: translateY(-5rem);
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+@keyframes out {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    70% {
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(-5rem);
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+#menu_wrap.show {
+    -webkit-animation: in 250ms ease both;
+    animation: in 250ms ease both;
+}
+
+#menu_wrap.hide {
+    -webkit-animation: out 250ms ease both;
+    animation: out 250ms ease both;
+}
+
+/* End of animation */
+
+#menu_wrap ul {
     margin: 0 auto;
     align-items: center;
     display: flex;
@@ -247,7 +315,7 @@ img {
 
 }
 
-.show ul li {
+#menu_wrap ul li {
     margin: 1rem;
 }
 
