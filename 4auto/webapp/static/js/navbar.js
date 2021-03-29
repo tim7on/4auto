@@ -1,16 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
     const btn = document.querySelector('#toggle_menu'),
-        menu = document.querySelector('#menu_wrap'),
-        menu_ul = document.querySelector('.menu_ul'),
-        nav_link = document.querySelectorAll('.nav_link'),
-        navwrap = document.querySelector('nav');
+        menu = document.querySelector('#menu_wrap');
+    // menu_ul = document.querySelector('.menu_ul'),
+    // nav_link = document.querySelectorAll('.nav_link'),
+    // navwrap = document.querySelector('nav');
 
     function hideMenu(e) {
         e.preventDefault;
         menu.className = menu.className !== 'show' ? 'show' : 'hide';
         setTimeout(function () {
             menu.style.display = 'none';
-        }, 250);
+        }, 400);
 
     }
     btn.addEventListener('click', (e) => {
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (menu.className === 'hide') {
             setTimeout(function () {
                 menu.style.display = 'none';
-            }, 250); // timed to match animation-duration
+            }, 400); // timed to match animation-duration
         }
     });
 
@@ -36,19 +36,19 @@ document.addEventListener('DOMContentLoaded', () => {
     //         hideMenu(e);
     //     }
     // });
-
-    document.addEventListener('touchstart', (e) => {
-        if (menu.className === 'show') {
-            if (e.target !== navwrap && !navwrap.contains(e.target)) {
-                hideMenu(e);
-            }
-        }
-    });
-    document.addEventListener('click', (e) => {
-        if (menu.className === 'show') {
-            if (e.target !== navwrap && !navwrap.contains(e.target)) {
-                hideMenu(e);
-            }
-        }
-    });
+    // NOT NEEDED ANYMORE
+    // document.addEventListener('touchstart', (e) => {
+    //     if (menu.className === 'show') {
+    //         if (e.target !== navwrap && !navwrap.contains(e.target)) {
+    //             hideMenu(e);
+    //         }
+    //     }
+    // });
+    // document.addEventListener('click', (e) => {
+    //     if (menu.className === 'show') {
+    //         if (e.target !== navwrap && !navwrap.contains(e.target)) {
+    //             hideMenu(e);
+    //         }
+    //     }
+    // });
 });

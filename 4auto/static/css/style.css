@@ -128,7 +128,10 @@ img {
 
 .navgrid {
     display: grid;
-    padding: 0.5rem 2rem;
+    /* padding: 0.5rem 2rem; */
+    width: 90%;
+    padding: 0.5rem 0;
+    margin: 0 auto;
     grid-template-columns: 3rem 1fr;
     height: 3rem;
     justify-items: end;
@@ -147,12 +150,16 @@ img {
 }
 
 #toggle_menu {
+    padding: 1rem 0;
+    cursor: pointer;
     color: var(--light);
+    transition: color 200ms ease-in;
 
 }
 
 #toggle_menu:hover {
     color: var(--accent);
+    transition: color 200ms ease-in;
 }
 
 .accent {
@@ -174,6 +181,11 @@ img {
     font-size: 1rem;
     margin: 0rem 0.5rem;
     text-decoration: none;
+    transition: color 200ms ease-in;
+}
+.nav_link:hover{
+    color: var(--accent);
+    transition: color 200ms ease-in;
 }
 
 .nav_active {
@@ -202,17 +214,8 @@ img {
 }
 
 
-.ulgrid {
-    display: none;
-    align-items: center;
+#menu_wrap {
     padding-right: 1rem;
-    box-shadow: 0 0 0 0 #131a22a6 !important;
-    transition: box-shadow ease-in 0.2s;
-}
-
-
-.show {
-    display: block;
     position: fixed;
     border-radius: 0 0 0 1rem;
     top: 4rem;
@@ -224,20 +227,86 @@ img {
     width: 50%;
     background-color: var(--lightDark);
     box-shadow: 0 0.5rem 0.75rem 0 #131a22a6 !important;
-    transition: box-shadow ease-in 0.2s;
-
 }
 
-.show #hide_menu {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 1rem 1.5rem;
-    border-radius: 0 1rem 0 1rem;
-    background-color: var(--accent);
+/*  animation of menu */
+@-webkit-keyframes in {
+    0% {
+        -webkit-transform: translateX(5rem);
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    15% {
+        opacity: 0;
+    }
+
+    100% {
+        -webkit-transform: translateX(0rem);
+        opacity: 1;
+        visibility: visible;
+    }
 }
 
-.show ul {
+@keyframes in {
+    0% {
+        transform: translateX(5rem);
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    15% {
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+@-webkit-keyframes out {
+    0% {
+        -webkit-transform: translateX(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    100% {
+        -webkit-transform: translateX(5rem);
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+@keyframes out {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    100% {
+        transform: translateX(5rem);
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+#menu_wrap.show {
+    -webkit-animation: in 250ms ease both;
+    animation: in 250ms ease both;
+}
+
+#menu_wrap.hide {
+    -webkit-animation: out 250ms ease both;
+    animation: out 250ms ease both;
+}
+
+/* End of animation */
+
+#menu_wrap ul {
     margin: 0 auto;
     align-items: center;
     display: flex;
@@ -247,7 +316,7 @@ img {
 
 }
 
-.show ul li {
+#menu_wrap ul li {
     margin: 1rem;
 }
 
@@ -587,28 +656,6 @@ img {
 }
 
 @media (min-width: 1150px) {
-    #hide_menu {
-        display: none;
-    }
-
-    .nav_link:after {
-        content: '';
-        cursor: not-allowed;
-        pointer-events: none;
-        position: absolute;
-        bottom: -2rem;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background-color: var(--accent);
-        opacity: 0;
-        transition: all 200ms ease-in;
-    }
-
-    .nav_link:hover:after {
-        bottom: -0.25rem;
-        opacity: 1;
-    }
 
     .profile {
         grid-area: 1 / 1 / 1 / span 2;
@@ -627,20 +674,6 @@ img {
         margin-top: 0.5rem;
         display: block;
         grid-area: cal;
-    }
-
-    .ulgrid {
-
-        display: flex;
-        flex-direction: row;
-    }
-
-    .ulgrid ul {
-        display: flex;
-    }
-
-    .menu {
-        display: none;
     }
 
     .sidebar {
@@ -692,10 +725,11 @@ img {
         height: 15rem;
     }
 
-    /* .card img {
-        position: relative;
-        height: 10rem;
-    } */
+    #menu_wrap {
+        left: 80%;
+        min-width: 20%;
+        width: 20%;
+    }
 
     .sidebar {
         justify-self: baseline;
@@ -708,17 +742,6 @@ img {
         display: grid;
         grid-template-columns: 220px auto 280px;
     }
-
-    /* .col2_grid {
-        margin: auto;
-        display: grid;
-        justify-content: center;
-        align-items: flex-start;
-        width: 100%;
-        grid-template-columns: 70% 30%;
-        gap: 0.75rem;
-
-    } */
 
     .grid_user_detail {
 
