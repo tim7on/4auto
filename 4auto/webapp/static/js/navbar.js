@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const btn = document.querySelector('#toggle_menu'),
         menu = document.querySelector('#menu_wrap'),
+        menu_ul = document.querySelector('.menu_ul'),
         nav_link = document.querySelectorAll('.nav_link'),
         navwrap = document.querySelector('nav');
 
@@ -9,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         menu.className = menu.className !== 'show' ? 'show' : 'hide';
         setTimeout(function () {
             menu.style.display = 'none';
-        }, 500);
+        }, 250);
 
     }
     btn.addEventListener('click', (e) => {
@@ -22,16 +23,28 @@ document.addEventListener('DOMContentLoaded', () => {
         if (menu.className === 'hide') {
             setTimeout(function () {
                 menu.style.display = 'none';
-            }, 500); // timed to match animation-duration
+            }, 250); // timed to match animation-duration
         }
     });
-    menu.addEventListener('mouseout', e => {
-        console.log('mouse out')
-        if (!menu.matches(':hover')) {
-            hideMenu(e);
+
+    // MOUSE LEAVE FOR ANOTHER OBJECTS???
+    // 
+    // menu_ul.addEventListener('mouseleave', e => {
+    //     console.log(e.currentTarget);
+    //     if (!menu.contains(e.currentTarget) || !menu.matches(':hover') || menu.matches(':after')) {
+    //         console.log('IF WORKED');
+    //         hideMenu(e);
+    //     }
+    // });
+
+    document.addEventListener('touchstart', (e) => {
+        if (menu.className === 'show') {
+            if (e.target !== navwrap && !navwrap.contains(e.target)) {
+                hideMenu(e);
+            }
         }
     });
-    document.addEventListener('touchend', (e) => {
+    document.addEventListener('click', (e) => {
         if (menu.className === 'show') {
             if (e.target !== navwrap && !navwrap.contains(e.target)) {
                 hideMenu(e);
