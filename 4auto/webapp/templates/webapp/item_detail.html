@@ -4,8 +4,8 @@
 
 
 {% block content %}
-<div class="overlay hidden">
-    <div class="profile" >
+<div class="overlay hidden" style="display: none; opacity: 0;">
+    <div class="profile">
         <div class="gridprofile">
             <img class="img" src="{{ profile.avatar.url }}" alt="">
             <div class="txt1">
@@ -65,7 +65,7 @@
             </a>
         </div>
         <div style='align-self: baseline; margin: auto;'>
-            <h1 class="accent"style="margin-bottom:1rem; display:block;">Новинки</h1>
+            <h1 class="accent" style="margin-bottom:1rem; display:block;">Новинки</h1>
             <div class="col1">
                 {% include 'partial/new_items.html' %}
             </div>

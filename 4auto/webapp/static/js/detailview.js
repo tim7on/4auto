@@ -1,11 +1,12 @@
+'use strict';
 document.addEventListener('DOMContentLoaded', () => {
     const overlay = document.querySelector('.overlay'),
         btn = document.querySelector('#connect'),
         hidden = document.querySelector('.hidden'),
-        body = document.querySelector('body')
+        body = document.querySelector('body');
 
     btn.addEventListener('click', (e) => {
-        e.preventDefault;
+        e.preventDefault();
         body.style.overflow = 'hidden';
         hidden.style.display = 'flex';
         window.setTimeout(function () {
@@ -13,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 0);
     });
     overlay.addEventListener('click', (e) => {
-        e.preventDefault;
+        e.preventDefault();
         const target = e.target;
         if (target && target.classList.contains('overlay')) {
             body.style.overflow = '';
