@@ -73,13 +73,16 @@
             <div id='menu_wrap' style="display:none;" class="hide">
                 <ul class="menu_ul">
                     <li><a href="#" class='nav_link'>Поиск</a></li>
-                    <li><a href=" {% url 'all' %}" class="nav_link">Каталог</a></li>
                     {% if request.user.is_authenticated %}
                     <li><a href="{% url 'profile' request.user.username %}" class='nav_link'>Профиль</a></li>
                     {% else %}
-                    <li><a href="#" class='nav_link'>Регистрация</a></li>
+                    <li><a href="{% url 'accounts:login' %} " class='nav_link'>Вход</a></li>
                     {% endif %}
+                    <li><a href=" {% url 'all' %}" class="nav_link">Каталог</a></li>
                     <li><a href="#" class='nav_link'>О нас</a></li>
+                    {% if request.user.is_authenticated %}
+                    <li><a href="{% url 'accounts:logout' %}" class="nav_link">Выход</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>

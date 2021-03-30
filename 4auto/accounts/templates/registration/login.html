@@ -11,11 +11,9 @@
 
 {% block content %}
 <div class="panel">
-    <div class="panel_title">
-        <h2>Вход</h2>
-    </div>
-    <div class="panel_body">
-        {% include 'partial/form.html' with form_method='post' %}
-    </div>
+    <h1>Вход</h1>
+    {% include 'partial/form.html' with form_method='post' button_text='Войти' %}
+    <p>Нет аккаунта? <a href=" {% url 'accounts:create' %} ">Регистрация</a>.</p>
 </div>
+
 {% endblock %}

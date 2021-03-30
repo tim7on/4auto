@@ -14,8 +14,6 @@
         <br class="info_detail_txt ">
         <p class="info_detail_txt price"> ЦЕНА: <strong>{{ item.price}}</strong></p>
     </div>
-    <a href="{{ item.get_absolute_url }}" class="btn_rght">
-        <p>Подробнее</p>
-    </a>
+    <a href="{{ item.get_absolute_url }}" class="btn_rght">Подробнее</a>
 </div>
 {% endfor %}

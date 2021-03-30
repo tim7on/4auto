@@ -11,6 +11,7 @@
     font-family: 'Roboto', sans-serif;
     margin: 0em;
     padding: 0em;
+    color: var(--light);
 
 }
 
@@ -21,8 +22,17 @@
 }
 
 a {
+    color: var(--accent);
     text-decoration: none;
+    transition: color 0.3s ease, background-color 0.3s ease-in;
 }
+
+/* a:hover,
+a:focus{
+    color: var(--lightDark);
+    transition: color 0.3s ease;
+
+} */
 
 body {
     margin: 0px;
@@ -106,24 +116,12 @@ img {
     width: 50%;
     min-width: 20rem;
     margin: 0 auto;
-    background-color: var(--Background);
     padding: 0.75rem;
-    border-color: transparent;
     border-radius: 1rem;
-    color: var(--light);
-    box-shadow: 0 0 0 0 var(--Background);
-    transition: box-shadow ease-in 250ms;
 
 
 }
 
-#main_search:focus,
-#main_search:hover {
-    outline: none;
-    box-shadow: 0rem 0.5rem 1rem 0 #232f3e98;
-    transition: box-shadow ease-in 250ms;
-
-}
 
 .navgrid {
     display: grid;
@@ -160,8 +158,14 @@ img {
     transition: color 200ms ease-in;
 }
 
-.accent {
+.dark {
     color: var(--Background);
+    transition: color 0.3s ease;
+}
+
+.accent {
+    color: var(--accent);
+    transition: color 0.3s ease;
 }
 
 .link {
@@ -508,6 +512,8 @@ img {
 .btn_rght {
     position: absolute;
     cursor: pointer;
+    outline: none;
+    border-color: transparent;
     justify-content: center;
     text-align: center;
     bottom: 0;
@@ -687,6 +693,80 @@ img {
 
 #cal_whats {
     background-image: url('../svg/cal_whats.svg');
+}
+
+.panel {
+    position: relative;
+    align-self: center;
+    justify-self: center;
+    background-color: var(--Background);
+    max-width: 80vw;
+    width: 25rem;
+    padding: 2rem 1rem;
+    border-radius: 1rem;
+    margin: auto;
+    box-shadow: 0 10px 16px 0 #232f3e1f, 0 6px 20px 0 #232f3e44 !important;
+}
+
+.panel h1 {
+    margin: 1rem auto 1rem auto;
+    text-align: center;
+}
+.panel p {
+    text-align: center;
+    padding-bottom: 3rem;
+}
+.panel form {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.panel a:hover,
+.panel a:focus {
+    color: var(--lightDark);
+    background-color: var(--accent);
+    transition: color 0.3s ease, background-color 0.3s ease-in;
+}
+
+form label {
+    margin-top: 1rem;
+}
+::placeholder{
+    color: var(--lightTrans);
+}
+:focus::placeholder{
+    color: var(--Background);
+}
+input[type=text],
+input[type=password],
+input[type=number],
+input[type=search],
+input[type=email] {
+    min-width: 50%;
+    outline: none;
+    background-color: var(--lightDark);
+    padding: 0.35rem;
+    margin-top: 1rem;
+    font-size: 1rem;
+    border-color: transparent;
+    border-radius: 1rem;
+    transition: background-color 0.3s ease-out, color 0.3s ease;
+}
+
+input[type=text]:focus,
+input[type=password]:focus,
+input[type=number]:focus,
+input[type=search]:focus,
+input[type=email]:focus {
+    background-color: var(--accent);
+    color: var(--Dark);
+    transition: background-color 0.3s ease-out, color 0.3s ease;
+}
+
+
+input[type=submit] {
+    font-size: 1rem;
 }
 
 @media (min-width: 1150px) {
