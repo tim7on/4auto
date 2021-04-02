@@ -59,6 +59,14 @@ class ProfileChangeForm(forms.ModelForm):
     class Meta:
         model = Profile
         exclude = ['user']
+        widgets = {
+            'phone': forms.TextInput(attrs={'placeholder': '+996 (777) 777-777'}),
+            'whats': forms.TextInput(attrs={'placeholder': '+996 (777) 777-777'}),
+            'insta': forms.TextInput(attrs={'placeholder': 'Введите логин без @'}),
+            'schedule': forms.Textarea(
+                attrs={'placeholder': 'Введите свой график работы', 'rows':10, 'cols':15}),
+            'avatar': forms.FileInput(),
+        }
 
 
 class SetPasswordForm(forms.ModelForm):
@@ -98,7 +106,7 @@ class PasswordChangeForm(SetPasswordForm):
 
     class Meta:
         model = get_user_model()
-        fields = ['password', 'password_confirm', 'old_password']
+        fields = [ 'old_password', 'password', 'password_confirm']
 
 
 class PasswordResetEmailForm(forms.Form):

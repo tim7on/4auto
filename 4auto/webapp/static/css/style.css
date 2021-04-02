@@ -3,7 +3,7 @@
     --Background: #232F3E;
     --lightDark: #36465a;
     --light: #E2E5E9;
-    --lightTrans: #ccd0d6;
+    --lightTrans: #e2e5e98e;
     --accent: #FF9900;
 }
 
@@ -33,6 +33,9 @@ a:focus{
     transition: color 0.3s ease;
 
 } */
+button {
+    font: 400 1rem Roboto;
+}
 
 body {
     margin: 0px;
@@ -40,6 +43,8 @@ body {
     background-color: var(--lightTrans);
     position: relative;
     scroll-behavior: smooth;
+    width: 100vw;
+    height: 100vh;
 }
 
 nav {
@@ -102,7 +107,10 @@ img {
 }
 
 .new_content {
-    margin: 12rem 1rem 1rem 1rem;
+    margin: 1rem;
+    position: absolute;
+    bottom: 5rem;
+    min-width: -webkit-fill-available;
 }
 
 .search_overlay {
@@ -526,6 +534,42 @@ img {
     transition: box-shadow ease-in 300ms;
 }
 
+.btn_outline {
+    position: absolute;
+    cursor: pointer;
+    outline: none;
+    justify-content: center;
+    text-align: center;
+    border-radius: 1rem;
+    border-style: solid;
+    border-width: 2px;
+    background-color: transparent;
+    border-color: var(--accent);
+    color: var(--accent);
+    padding: 0.5rem;
+    transition: color ease-in 300ms, background-color ease-out 300ms;
+
+}
+
+.btn_outline:hover,
+.btn_outline:focus {
+    outline: none;
+    color: var(--Dark);
+    background-color: var(--accent);
+    transition: color ease-in 300ms, background-color ease-out 300ms;
+}
+
+.nav_link .editsvg {
+    fill: var(--light);
+    transition: fill ease-in 300ms;
+}
+
+.nav_link:hover .editsvg,
+.nav_link:focus .editsvg {
+    fill: var(--accent);
+    transition: fill ease-in 300ms;
+}
+
 .btn_rght:hover,
 .btn_rght:focus {
     outline: none;
@@ -700,26 +744,43 @@ img {
     align-self: center;
     justify-self: center;
     background-color: var(--Background);
-    max-width: 80vw;
-    width: 25rem;
+    max-width: 80%;
     padding: 2rem 1rem;
     border-radius: 1rem;
-    margin: auto;
+    margin: 2rem auto;
     box-shadow: 0 10px 16px 0 #232f3e1f, 0 6px 20px 0 #232f3e44 !important;
 }
 
+.panel div {
+    min-width: 80%;
+    margin: 0 1rem;
+}
+
 .panel h1 {
-    margin: 1rem auto 1rem auto;
+    margin: 1rem auto 0 auto;
     text-align: center;
 }
+
+.panel div {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
 .panel p {
     text-align: center;
+    padding-top: 1rem;
     padding-bottom: 3rem;
 }
+
 .panel form {
     justify-content: center;
     align-items: center;
-    text-align: center;
+    text-align: left;
+}
+
+.red {
+    color: #ff5e00;
 }
 
 .panel a:hover,
@@ -732,22 +793,29 @@ img {
 form label {
     margin-top: 1rem;
 }
-::placeholder{
+
+::placeholder {
+
     color: var(--lightTrans);
 }
-:focus::placeholder{
+
+:focus::placeholder {
     color: var(--Background);
 }
+
 input[type=text],
 input[type=password],
 input[type=number],
 input[type=search],
-input[type=email] {
-    min-width: 50%;
+input[type=email],
+input[type=file],
+textarea {
+    min-width: 80%;
+    resize: none;
     outline: none;
     background-color: var(--lightDark);
     padding: 0.35rem;
-    margin-top: 1rem;
+    margin-top: 0.75rem;
     font-size: 1rem;
     border-color: transparent;
     border-radius: 1rem;
@@ -758,19 +826,39 @@ input[type=text]:focus,
 input[type=password]:focus,
 input[type=number]:focus,
 input[type=search]:focus,
-input[type=email]:focus {
+input[type=email]:focus,
+textarea:focus {
     background-color: var(--accent);
     color: var(--Dark);
     transition: background-color 0.3s ease-out, color 0.3s ease;
 }
 
-
 input[type=submit] {
     font-size: 1rem;
 }
 
-@media (min-width: 1150px) {
+#user_form {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    overflow: hidden;
+}
 
+.avatar {
+    width: 8rem;
+    height: 8rem;
+    border-radius: 100%;
+    margin: 1rem auto;
+}
+
+@media (min-width: 1150px) {
+    .panel {
+        max-width: fit-content;
+        padding: 1rem 3rem;
+    }
+
+    #user_form {
+        grid-template-columns: repeat(2, 25rem);
+    }
 
     .profile {
         grid-area: 1 / 1 / 1 / span 2;

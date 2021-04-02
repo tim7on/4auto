@@ -132,7 +132,7 @@ LOGIN_URL = 'accounts:login'
 
 # docker-compose logs -f (Смотреть логи)
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-ACTIVATE_USERS_EMAIL = True
+ACTIVATE_USERS_EMAIL = os.environ.get("ACTIVATE_USERS_EMAIL", "True")
 BASE_HOST = 'localhost:8000'
 
 REST_FRAMEWORK = {

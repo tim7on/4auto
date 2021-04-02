@@ -15,7 +15,7 @@
         <p>{{ item.description|truncatechars:75 }}</p>
         <br>
         <a class="link" href="{{ item.owner.profile.get_absolute_url }}">@{{ item.owner }}</a>
-        <p class="price"> ЦЕНА: <strong>{{ item.price}}</strong></p>
+        <p class="price"> ЦЕНА: {{ item.price}}</p>
         <p>{{item.created|date:"d M Y" }}</p>
     </div>
     <a href="{{ item.get_absolute_url }}" class="btn_rght">Подробнее</a>

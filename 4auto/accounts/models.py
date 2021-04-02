@@ -53,7 +53,8 @@ class Profile(models.Model):
     phone_regex = RegexValidator(
         regex=r'^\+?1?\d{12,15}$', message="Телефон должен быть в формате: '+996XXXXXXXXX'.")
     insta_regex = RegexValidator(
-        regex=r'([A-Za-z0-9_](?:(?:[A-Za-z0-9_]|(?:\.(?!\.))){0,28}(?:[A-Za-z0-9_]))?)'
+        regex=r'(^[A-Za-z0-9_](?:(?:[A-Za-z0-9_]|(?:\.(?!\.))){0,28}(?:[A-Za-z0-9_]))?)'
+        # regex=r'([A-Za-z0-9_](?:(?:[A-Za-z0-9_]|(?:\.(?!\.))){0,28}(?:[A-Za-z0-9_]))?)'
     )
 
     user: AbstractUser = models.OneToOneField(get_user_model(), related_name='profile',

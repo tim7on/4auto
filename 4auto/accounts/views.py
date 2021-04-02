@@ -82,36 +82,34 @@ class UserChangeView(UserPassesTestMixin, UpdateView):
             kwargs['profile_form'] = self.get_profile_form()
         return super().get_context_data(**kwargs)
 
-    def post(self, *args, **kwargs):
-        if self.request.is_ajax and self.request.method == "POST":
-            self.object = self.get_object()
-            profile_form = self.get_profile_form(self.request.POST)
-            form = self.get_user_form(self.request.POST)
-            if form.is_valid() and profile_form.is_valid():
-                profile_form.save()
-                form.save()
-                return HttpResponse('')
-            else:
-                return HttpResponse('')
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        profile_form = self.get_profile_form()
+        if form.is_valid() and profile_form.is_valid():
+            return self.form_valid(form, profile_form)
+        else:
+            return self.form_invalid(form, profile_form)
 
-        return HttpResponse('')
+    def form_valid(self, form, profile_form):
+        form.save()
+        profile_form.save()
+        return HttpResponseRedirect(self.get_success_url())
 
-    def get_success_url(self, req):
-        return reverse('accounts:detail', kwargs={'pk': self.object.pk})
+    def form_invalid(self, form, profile_form):
+        context = self.get_context_data(form=form, profile_form=profile_form)
+        return self.render_to_response(context)
 
-    def get_profile_form(self, *args, **kwargs):
+    def get_success_url(self):
+        return reverse('profile', kwargs={'username': self.object.username})
+
+    def get_profile_form(self):
         form_kwargs = {'instance': self.object.profile}
         if self.request.method == 'POST':
             form_kwargs['data'] = self.request.POST
             form_kwargs['files'] = self.request.FILES
         return ProfileChangeForm(**form_kwargs)
 
-    def get_user_form(self, *args, **kwargs):
-        form_kwargs = {'instance': self.object}
-        if self.request.method == 'POST':
-            form_kwargs['data'] = self.request.POST
-            form_kwargs['files'] = self.request.FILES
-        return UserChangeForm(**form_kwargs)
 
 
 class UserPasswordChangeView(LoginRequiredMixin, UpdateView):
