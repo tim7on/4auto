@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 
-{% block title %}Редактировать пользователя{% endblock %}
+{% block title %}Редактировать профиль{% endblock %}
 
 {% block content %}
 <div class="panel">
-    <h1>Поменять личные данные</h1>
+    <h1>Редактировать профиль</h1>
     <form id='user_form' action="{% url 'accounts:change' user_obj.pk %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {% include 'partial/twoforms.html' with form1=form form2=profile_form fields_only=True button_text="Сохранить" %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="grid">
+    <div class='ads'>
+        <div>
+            <h1>ADS</h1>
+            <p>blahblahblabhlahb labhalbhalbhla hlabhlahblabhla albhlahbla</p>
+        </div>
+    </div>
+    <div class="content_grid">
+        <form class="search_form" action="{% url 'search' %}" method='get'>
+            <div class="search_overlay">
+                <input type="search" name="q" placeholder="Введите название...">
+                <button class='btn_outline' type='submit'>Поиск</button>
+            </div>
+        </form>
+        {% include 'partial/items.html' %}
+    </div>
+    {% if items.paginator.num_pages != 1 %}
+    {% include 'partial/pagination.html' %}
+    {% endif %}
+
+    <div class='ads area_top'>
+        <div>
+            <h1>ADS</h1>
+            <p>blahblahblabhlahb labhalbhalbhla hlabhlahblabhla albhlahbla</p>
+        </div>
+    </div>
+</div>
+{% endblock content %}

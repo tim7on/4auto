@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load mptt_tags %}
 {% load static %}
 {% block title %}{{ items.name }}{% endblock title %}
 
@@ -32,13 +33,7 @@
     <div class='ads'>
         <div>
             <h2>ADS</h2>
-            <p>blahblahblabhlahb labhalbhalbhla hlabhlahblabhla albhlahbla</p>
-            <br>
-            <p>afkldsanlsfaksdf</p>
-            <p>safjkd;slanfkdsna;fsdn f;adskn fldn;saf</p>
-            <p>safjkd;slanfkdsna;fsdn f;adskn fldn;saf</p>
-            <p>safjkd;slanfkdsna;fsdn f;adskn fldn;saf</p>
-            <p>safjkd;slanfkdsna;fsdn f;adskn fldn;saf</p>
+
         </div>
     </div>
     <div class="col2_grid">
@@ -51,8 +46,9 @@
             {% endif %}
             <div class="info_detail">
                 <h2>{{ item.name }}</h2>
-                <h3>Категория: {{ item.category }}</h3>
+                <h3>Категория: <a href="{{ item.category.get_absolute_url }}">{{ item.category }}</a></h3>
                 <p>Теги: Скоро добавлю</p>
+                <br>
                 <p>{{ item.description }}</p>
                 <br>
                 <hr>
@@ -62,21 +58,21 @@
             </div>
             <a id="connect" class="btn_rght">Связаться</a>
         </div>
-        <div style='align-self: baseline; margin: auto;'>
+        <div class="new_items" '>
             <h1 class="accent" style="margin-bottom:1rem; display:block;">Новинки</h1>
             <div class="col1">
                 {% include 'partial/new_items.html' %}
             </div>
         </div>
     </div>
-    <div class='ads'>
-        <div>
-            <h2>ADS</h2>
-            <p>blahblahblabhlahb labhalbhalbhla hlabhlahblabhla albhlahbla</p>
+    <div class=' ads'>
+            <div>
+                <h2>ADS</h2>
+                <p>blahblahblabhlahb labhalbhalbhla hlabhlahblabhla albhlahbla</p>
+            </div>
         </div>
     </div>
-</div>
-{% endblock content %}
-{% block js %}
-<script src="{% static 'js/detailview.js' %}"></script>
-{% endblock js %}
+    {% endblock content %}
+    {% block js %}
+    <script src="{% static 'js/detailview.js' %}"></script>
+    {% endblock js %}

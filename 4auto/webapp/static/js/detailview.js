@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 0);
     });
     overlay.addEventListener('click', (e) => {
-        e.preventDefault();
         const target = e.target;
         if (target && target.classList.contains('overlay')) {
             body.style.overflow = '';

@@ -1,17 +1,25 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}{{ items.name }}{% endblock title %}
+{% block title %}4auto Все Для Автомобиля{% endblock title %}
 {% block content %}
-<div class="search_overlay"><input type="search" name="Поиск" placeholder="Введите слово для поиска" id="main_search">
-</div>
+
+
+<form class="search_form" action="{% url 'search' %}" method='get'>
+    <div class="search_overlay">
+        <input type="search" name="q" placeholder="Введите название...">
+        <button class='btn_outline' type='submit'>Поиск</button>
+    </div>
+</form>
+
 <div class="new_content">
-    <h2 class="dark">Новинки</h2>
+    <h2 class="accent">Новинки</h2>
     <div class="scroll_horizontal">
         <div class='horizontal_grid'>
             {% include 'partial/new_items.html' %}
         </div>
     </div>
 </div>
+
 {% endblock content %}
 {% block js %}
 <script src="{% static 'js/hscroll.js' %}"></script>

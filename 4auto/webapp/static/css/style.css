@@ -1,5 +1,6 @@
 :root {
     --Dark: #131A22;
+    --grey: #cacfd6;
     --Background: #232F3E;
     --lightDark: #36465a;
     --light: #E2E5E9;
@@ -40,11 +41,8 @@ button {
 body {
     margin: 0px;
     padding: 0px;
-    background-color: var(--lightTrans);
-    position: relative;
+    background-color: var(--Dark);
     scroll-behavior: smooth;
-    width: 100vw;
-    height: 100vh;
 }
 
 nav {
@@ -108,16 +106,14 @@ img {
 
 .new_content {
     margin: 1rem;
-    position: absolute;
     bottom: 5rem;
-    min-width: -webkit-fill-available;
 }
 
 .search_overlay {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 10rem 1rem 0 1rem;
+    margin: 5rem 1rem;
 }
 
 #main_search {
@@ -533,19 +529,24 @@ img {
     box-shadow: 0 0 0 0 var(--accent);
     transition: box-shadow ease-in 300ms;
 }
-
+.search_form{
+    align-items: center;
+    justify-content: center;
+}
+.search_overlay input[type=search]{
+    border-radius: 1rem 0 0 1rem;
+    margin-top: 0;
+}
 .btn_outline {
-    position: absolute;
     cursor: pointer;
     outline: none;
     justify-content: center;
+    box-sizing: border-box;
     text-align: center;
-    border-radius: 1rem;
-    border-style: solid;
-    border-width: 2px;
-    background-color: transparent;
-    border-color: var(--accent);
-    color: var(--accent);
+    border-radius: 0 1rem 1rem 0;
+    border-style: none;
+    background-color: var(--accent);
+    color: var(--Dark);
     padding: 0.5rem;
     transition: color ease-in 300ms, background-color ease-out 300ms;
 
@@ -554,8 +555,8 @@ img {
 .btn_outline:hover,
 .btn_outline:focus {
     outline: none;
-    color: var(--Dark);
-    background-color: var(--accent);
+    color: var(--accent);
+    background-color: var(--Background);
     transition: color ease-in 300ms, background-color ease-out 300ms;
 }
 
@@ -606,7 +607,7 @@ img {
 .ads {
     width: 100%;
     height: 100%;
-    background: var(--accent);
+    background: var(--Background);
     justify-content: center;
     border-radius: 1rem;
 
@@ -850,6 +851,13 @@ input[type=submit] {
     margin: 1rem auto;
 }
 
+.new_items {
+    position: relative;
+    width: inherit;
+    align-self: baseline;
+    margin: auto;
+}
+
 @media (min-width: 1150px) {
     .panel {
         max-width: fit-content;
@@ -942,7 +950,7 @@ input[type=submit] {
         margin: 1rem;
         max-width: 100%;
         display: grid;
-        grid-template-columns: 220px auto 280px;
+        grid-template-columns: 280px auto 280px;
     }
 
     .grid_user_detail {

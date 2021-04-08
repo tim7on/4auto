@@ -1,5 +1,6 @@
 :root {
     --Dark: #131A22;
+    --grey: #cacfd6;
     --Background: #232F3E;
     --lightDark: #36465a;
     --light: #E2E5E9;
@@ -40,8 +41,7 @@ button {
 body {
     margin: 0px;
     padding: 0px;
-    background-color: var(--lightTrans);
-    position: relative;
+    background-color: var(--Dark);
     scroll-behavior: smooth;
 }
 
@@ -105,14 +105,15 @@ img {
 }
 
 .new_content {
-    margin: 12rem 1rem 1rem 1rem;
+    margin: 1rem;
+    bottom: 5rem;
 }
 
 .search_overlay {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 10rem 1rem 0 1rem;
+    margin: 5rem 1rem;
 }
 
 #main_search {
@@ -601,7 +602,7 @@ img {
 .ads {
     width: 100%;
     height: 100%;
-    background: var(--accent);
+    background: var(--Background);
     justify-content: center;
     border-radius: 1rem;
 
@@ -739,28 +740,43 @@ img {
     align-self: center;
     justify-self: center;
     background-color: var(--Background);
-    max-width: 80vw;
-    width: 25rem;
+    max-width: 80%;
     padding: 2rem 1rem;
     border-radius: 1rem;
-    margin:2rem  auto ;
+    margin: 2rem auto;
     box-shadow: 0 10px 16px 0 #232f3e1f, 0 6px 20px 0 #232f3e44 !important;
 }
 
+.panel div {
+    min-width: 80%;
+    margin: 0 1rem;
+}
+
 .panel h1 {
-    margin: 1rem auto 1rem auto;
+    margin: 1rem auto 0 auto;
     text-align: center;
+}
+
+.panel div {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .panel p {
     text-align: center;
+    padding-top: 1rem;
     padding-bottom: 3rem;
 }
 
 .panel form {
     justify-content: center;
     align-items: center;
-    text-align: center;
+    text-align: left;
+}
+
+.red {
+    color: #ff5e00;
 }
 
 .panel a:hover,
@@ -775,7 +791,7 @@ form label {
 }
 
 ::placeholder {
-    
+
     color: var(--lightTrans);
 }
 
@@ -790,12 +806,12 @@ input[type=search],
 input[type=email],
 input[type=file],
 textarea {
-    min-width: 60%;
+    min-width: 80%;
     resize: none;
     outline: none;
     background-color: var(--lightDark);
     padding: 0.35rem;
-    margin-top: 1rem;
+    margin-top: 0.75rem;
     font-size: 1rem;
     border-color: transparent;
     border-radius: 1rem;
@@ -817,8 +833,35 @@ input[type=submit] {
     font-size: 1rem;
 }
 
-@media (min-width: 1150px) {
+#user_form {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    overflow: hidden;
+}
 
+.avatar {
+    width: 8rem;
+    height: 8rem;
+    border-radius: 100%;
+    margin: 1rem auto;
+}
+
+.new_items {
+    position: relative;
+    width: inherit;
+    align-self: baseline;
+    margin: auto;
+}
+
+@media (min-width: 1150px) {
+    .panel {
+        max-width: fit-content;
+        padding: 1rem 3rem;
+    }
+
+    #user_form {
+        grid-template-columns: repeat(2, 25rem);
+    }
 
     .profile {
         grid-area: 1 / 1 / 1 / span 2;
@@ -902,7 +945,7 @@ input[type=submit] {
         margin: 1rem;
         max-width: 100%;
         display: grid;
-        grid-template-columns: 220px auto 280px;
+        grid-template-columns: 280px auto 280px;
     }
 
     .grid_user_detail {
