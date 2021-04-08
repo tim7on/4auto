@@ -166,7 +166,7 @@ class Search(ListView):
         return query
 
     def get_queryset(self):
-       if ('q' in self.request.GET) and self.request.GET['q'].strip():
+        if ('q' in self.request.GET) and self.request.GET['q'].strip():
             query_string = self.request.GET['q']
 
             entry_query = self.get_query(
