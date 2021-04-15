@@ -20,23 +20,13 @@ class IndexView(ListView):
     paginate_by = 6
 
     def get_queryset(self):
-        queryset = Item.objects.all()
+        queryset = Item.objects.none()
         return queryset
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
-        items = self.get_queryset()
-        context['new_items'] = Item.objects.all().order_by('-created')[:6]
-        paginator = Paginator(items, self.paginate_by)
-
-        page = self.request.GET.get('page')
-
-        try:
-            items = paginator.page(page)
-        except PageNotAnInteger:
-            items = paginator.page(1)
-        except EmptyPage:
-            items = paginator.page(paginator.num_pages)
+        context['new_items'] = Item.objects.all().order_by('-created')[:9]
+        print(context)
         return context
 
 
@@ -48,27 +38,16 @@ class AllCategory(ListView):
     model = Item
     template_name = 'webapp/category.html'
     paginate_by = 6
+    context_object_name = 'items'
 
     def get_queryset(self):
-        queryset = Item.objects.all()
+        queryset = Item.objects.all().order_by('-created')
         return queryset
 
     def get_context_data(self, **kwargs):
         context = super(AllCategory, self).get_context_data(**kwargs)
-        items = self.get_queryset().order_by('-created')
-        paginator = Paginator(items, self.paginate_by)
-
-        page = self.request.GET.get('page')
-        try:
-            items = paginator.page(page)
-        except PageNotAnInteger:
-            items = paginator.page(1)
-        except EmptyPage:
-            items = paginator.page(paginator.num_pages)
-
-        context = {'items': items,
-                   'category': Category.objects.all()
-                   }
+        context['category'] = Category.objects.all()
+        print(context)
         return context
 
 
@@ -88,21 +67,10 @@ class CategoryListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(CategoryListView, self).get_context_data(**kwargs)
-        items = self.get_queryset().order_by('-created')
-        paginator = Paginator(items, self.paginate_by)
+        context['items'] = self.get_queryset().order_by('-created')
+        context['category'] = Category.objects.all()
 
-        page = self.request.GET.get('page')
-
-        try:
-            items = paginator.page(page)
-        except PageNotAnInteger:
-            items = paginator.page(1)
-        except EmptyPage:
-            items = paginator.page(paginator.num_pages)
-
-        context = {'items': items,
-                   'category': Category.objects.all()
-                   }
+        print(context)
         return context
 
 
@@ -117,6 +85,7 @@ class ItemDetailView(DetailView):
             user__username=self.kwargs['owner'])
         context['new_items'] = Item.objects.exclude(
             id=self.kwargs['pk']).order_by('-created')[:3]
+        print(context)
         return context
 
 
@@ -136,7 +105,7 @@ class ProfileDetailView(DetailView):
 
 class Search(ListView):
     ''' Search items '''
-    paginate_by = 9
+    paginate_by = 6
     template_name = "webapp/search.html"
 
     def normalize_query(self, query_string,
@@ -174,12 +143,12 @@ class Search(ListView):
 
             found_entries = Item.objects.filter(
                 entry_query).order_by('-created')
-
+        else:
+            found_entries = Item.objects.none()
         return found_entries
 
     def get_context_data(self, *args, **kwargs):
         context = super(Search, self).get_context_data(**kwargs)
-        context['q'] = self.request.GET.get('q')
-        context['items'] = self.get_queryset()
+        context['q'] = f'&q={self.request.GET.get("q")}'
         print(context)
         return context

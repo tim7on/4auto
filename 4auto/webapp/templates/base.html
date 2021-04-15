@@ -72,7 +72,7 @@
             </div>
             <div id='menu_wrap' style="display:none;" class="hide">
                 <ul class="menu_ul">
-                    <li><a href="#" class='nav_link'>Поиск</a></li>
+                    <li><a href="{% url 'search' %}" class='nav_link'>Поиск</a></li>
                     {% if request.user.is_authenticated %}
                     <li><a href="{% url 'profile' request.user.username %}" class='nav_link'>Профиль</a></li>
                     {% else %}
