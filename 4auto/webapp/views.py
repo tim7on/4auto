@@ -1,14 +1,17 @@
+import re
+import mptt
 from django.shortcuts import render, get_list_or_404, get_object_or_404
+from django.http import HttpResponseRedirect
 from django.views.generic import ListView, DetailView
+from django.views.generic.edit import CreateView, FormView
 from webapp.models import Category, Item
+from webapp.forms import ItemForm
 from accounts.models import Profile
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.paginator import Paginator, PageNotAnInteger
 from django.utils import timezone
 from django.urls import reverse
-import re
 from django.db.models import Q
-from django.db.models import Q
-import mptt
 
 
 class IndexView(ListView):
@@ -25,8 +28,7 @@ class IndexView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
-        context['new_items'] = Item.objects.all().order_by('-created')[:9]
-        print(context)
+        context['new_items'] = Item.objects.all().order_by('-created')[:8]
         return context
 
 
@@ -47,7 +49,6 @@ class AllCategory(ListView):
     def get_context_data(self, **kwargs):
         context = super(AllCategory, self).get_context_data(**kwargs)
         context['category'] = Category.objects.all()
-        print(context)
         return context
 
 
@@ -62,7 +63,6 @@ class CategoryListView(ListView):
     def get_queryset(self):
         queryset = Item.objects.filter(Q(category__slug=self.kwargs.get(
             'subcategory')) | Q(category__parent__slug=self.kwargs.get('subcategory')))
-        print(queryset)
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -70,7 +70,6 @@ class CategoryListView(ListView):
         context['items'] = self.get_queryset().order_by('-created')
         context['category'] = Category.objects.all()
 
-        print(context)
         return context
 
 
@@ -85,22 +84,36 @@ class ItemDetailView(DetailView):
             user__username=self.kwargs['owner'])
         context['new_items'] = Item.objects.exclude(
             id=self.kwargs['pk']).order_by('-created')[:3]
-        print(context)
         return context
 
 
 class ProfileDetailView(DetailView):
     model = Profile
     template_name = "webapp/profile.html"
+    paginate_by = 6
 
     def get_object(self, queryset=None):
         return Profile.objects.get(user__username=self.kwargs.get("username"))
 
     def get_context_data(self, **kwargs):
         context = super(ProfileDetailView, self).get_context_data(**kwargs)
-        context['items'] = Item.objects.filter(
-            owner__username=self.kwargs['username'])
+        context['object_list'] = Item.objects.filter(
+            owner__username=self.kwargs['username']).order_by('-created')
+        print(context)
         return context
+
+
+class ItemCreateView(LoginRequiredMixin, FormView):
+    template_name = 'webapp/item_create.html'
+    form_class = ItemForm
+
+    def form_valid(self, form):
+        form.instance.owner = self.request.user
+        form.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_success_url(self):
+        return reverse('profile', kwargs={'username': self.request.user.username})
 
 
 class Search(ListView):
@@ -150,5 +163,4 @@ class Search(ListView):
     def get_context_data(self, *args, **kwargs):
         context = super(Search, self).get_context_data(**kwargs)
         context['q'] = f'&q={self.request.GET.get("q")}'
-        print(context)
         return context

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load mptt_tags %}
 {% load static %}
+
 {% block title %}{{ items.name }}{% endblock title %}
 
 
@@ -8,7 +9,9 @@
 <div class="overlay hidden" style="display: none; opacity: 0;">
     <div class="profile">
         <div class="gridprofile">
-            <img class="img" src="{{ profile.avatar.url }}" alt="">
+            <img class="img"
+                src="{% if profile.avatar %} {{profile.avatar.url}} {% else %} {% static 'img/avatar.png' %} {% endif %}"
+                alt="">
             <div class="txt1">
                 <h2 class="txt2"> @{{ profile.user.username }}</h2>
                 <p class="txt2"> <strong>Адрес: </strong>{{ profile.adress}}</p>

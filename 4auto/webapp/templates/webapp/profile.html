@@ -3,12 +3,6 @@
 
 {% block title %}Пользователь{% endblock %}
 
-{% block menu %}
-{% if request.user.username == profile.username %}
-<li><a href="{% url 'accounts:change' user_obj.pk %}">Редактировать</a></li>
-<li><a href="{% url 'accounts:password_change' %}">Смена пароля</a></li>
-{% endif %}
-{% endblock %}
 {% block content %}
 <div class="grid">
     <div class='ads'>
@@ -43,6 +37,7 @@
                     <a class="cal_svg{% if profile.whats %} cal_svg_active {% else %} cal_svg_none {% endif %}"
                         id="cal_whats" href="https://wa.me/{{ profile.whats }}" target="_blank"
                         rel="noopener noreferrer"></a>
+                    <a class="cal_svg cal_svg_active" id="cal_new" href="{% url 'item_create' request.user.username %}"></a>
                 </div>
             </div>
         </div>

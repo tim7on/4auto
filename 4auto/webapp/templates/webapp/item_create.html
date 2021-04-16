@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Создание объявления{% endblock %}
+
+{% block content %}
+<div class="panel">
+    <h1>Объявление</h1>
+    {% include 'partial/form.html' with form_method='post' enctype="multipart/form-data" button_text="Сохранить" %}
+    <p></p>
+</div>
+{% endblock %}

@@ -75,6 +75,7 @@
                     <li><a href="{% url 'search' %}" class='nav_link'>Поиск</a></li>
                     {% if request.user.is_authenticated %}
                     <li><a href="{% url 'profile' request.user.username %}" class='nav_link'>Профиль</a></li>
+                    <li><a href="{% url 'item_create' request.user.username %}"class='nav_link'>Новое Объявление</a></li>
                     {% else %}
                     <li><a href="{% url 'accounts:login' %} " class='nav_link'>Вход</a></li>
                     {% endif %}

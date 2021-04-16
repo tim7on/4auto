@@ -46,7 +46,7 @@ class Item(models.Model):
     description = models.TextField(verbose_name=_("Описание"))
     price = models.DecimalField(verbose_name=_(
         'Цена'), max_digits=9, decimal_places=0)
-    created = models.DateTimeField(auto_created=True)
+    created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(null=True, blank=True)
 
     class Meta:

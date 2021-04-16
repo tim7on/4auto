@@ -8,6 +8,7 @@ from django.urls import reverse
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
+    path('u/<slug:username>/create/', ItemCreateView.as_view(), name='item_create'),
 
     path('', IndexView.as_view(), name='index'),
     path('search/', Search.as_view(), name='search'),
