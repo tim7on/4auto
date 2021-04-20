@@ -39,7 +39,7 @@ class CategoryAdmin(DraggableMPTTAdmin):
 
 
 class ItemAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'name', 'category', 'price')
+    list_display = ('pk', 'owner', 'name', 'category', 'price')
     list_display_links = ('pk', 'name')
     list_filter = ('category', TreeRelatedFieldListFilter),
     search_fields = ('name',)

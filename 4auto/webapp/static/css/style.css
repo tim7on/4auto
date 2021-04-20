@@ -399,7 +399,7 @@ img {
     overflow-x: scroll;
     scroll-behavior: smooth;
     white-space: nowrap;
-    
+
 
 }
 
@@ -504,6 +504,10 @@ img {
 
 .info_detail p {
     margin-top: 0.25rem;
+}
+
+.area_top {
+    grid-area: 1 / 1;
 }
 
 .price {
