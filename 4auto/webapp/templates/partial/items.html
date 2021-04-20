@@ -1,13 +1,20 @@
 {% load static %}
-
 {% for item in object_list %}
-<div class="card">
+<div class="card" id='item_{{ item.pk }}'>
+
+    {% if request.user == item.owner %}
+    <div class='delete_overlay'>
+        <a class="delete_btn" data-slug='{{ item.get_absolute_url }}' data-id='{{ item.pk }}'></a>
+    </div>
+    {% endif %}
+
     {% if item.photo %}
     <img class="card_img" src="{{item.photo.url}}" alt="Photo of item">
     {% else %}
     <img class="card_img" src=" {% static 'img/no-image.jpg' %}" style="filter: brightness(0.5);" alt="No Image"
         srcset="">
     {% endif %}
+    
     <div class="info">
         <h1>{{ item.name|truncatechars:20 }}</h1>
         <h3>Категория: {{ item.category }}</h3>
@@ -15,9 +22,13 @@
         <p>{{ item.description|truncatechars:75 }}</p>
         <br>
         <a class="link" href="{{ item.owner.profile.get_absolute_url }}">@{{ item.owner }}</a>
-        <p class="price"> ЦЕНА: {{ item.price}}</p>
+        <p> Цена: <strong class="price">{{ item.price}}</strong></p>
         <p>{{item.created|date:"d M Y" }}</p>
     </div>
     <a href="{{ item.get_absolute_url }}" class="btn_rght">Подробнее</a>
 </div>
 {% endfor %}
+{% block js %}
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<script src="{% static 'js/delete.js' %}"></script>
+{% endblock js %}

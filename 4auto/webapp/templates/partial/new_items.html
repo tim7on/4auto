@@ -12,7 +12,8 @@
         <h3 class="info_detail_txt ">Категория: {{ item.category }}</h3>
         <p class="info_detail_txt ">{{ item.description|truncatechars:75 }}</p>
         <br class="info_detail_txt ">
-        <p class="info_detail_txt price"> ЦЕНА: <strong>{{ item.price}}</strong></p>
+        <a class="info_detail_txt link" href="{{ item.owner.profile.get_absolute_url }}">@{{ item.owner }}</a>
+        <p class="info_detail_txt "> Цена: <strong class="price">{{ item.price}}</strong></p>
     </div>
     <a href="{{ item.get_absolute_url }}" class="btn_rght">Подробнее</a>
 </div>

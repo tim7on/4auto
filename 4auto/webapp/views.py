@@ -2,7 +2,7 @@ import re
 import mptt
 from django.shortcuts import render, get_list_or_404, get_object_or_404
 from django.http import HttpResponseRedirect
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, DeleteView
 from django.views.generic.edit import CreateView, FormView
 from webapp.models import Category, Item
 from webapp.forms import ItemForm
@@ -12,6 +12,7 @@ from django.core.paginator import Paginator, PageNotAnInteger
 from django.utils import timezone
 from django.urls import reverse
 from django.db.models import Q
+from django.http import JsonResponse
 
 
 class IndexView(ListView):
@@ -114,6 +115,20 @@ class ItemCreateView(LoginRequiredMixin, FormView):
 
     def get_success_url(self):
         return reverse('profile', kwargs={'username': self.request.user.username})
+
+
+class ItemDeleteView(UserPassesTestMixin, DeleteView):
+    model = Item
+
+    def test_func(self):
+        return self.request.user == self.get_object().owner
+
+    def post(self, *args, **kwargs):
+        self.object = self.get_object()
+        print(self.object)
+        self.object.delete()
+        data = {'success': 'OK'}
+        return JsonResponse(data)
 
 
 class Search(ListView):
