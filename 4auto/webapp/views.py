@@ -3,7 +3,7 @@ import mptt
 from django.shortcuts import render, get_list_or_404, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.views.generic import ListView, DetailView, DeleteView
-from django.views.generic.edit import CreateView, FormView
+from django.views.generic.edit import CreateView, FormView, UpdateView
 from webapp.models import Category, Item
 from webapp.forms import ItemForm
 from accounts.models import Profile
@@ -115,6 +115,37 @@ class ItemCreateView(LoginRequiredMixin, FormView):
 
     def get_success_url(self):
         return reverse('profile', kwargs={'username': self.request.user.username})
+
+
+class ItemUpdateView(UserPassesTestMixin, UpdateView):
+    template_name = 'webapp/item_create.html'
+    model = Item
+    form_class = ItemForm
+
+    def test_func(self):
+        return self.request.user == self.get_object().owner
+
+    def post(self, *args, **kwargs):
+        if self.request.is_ajax and self.request.method == "POST":
+            self.object = self.get_object()
+            form = self.get_form(self.request.POST)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect(self.get_success_url())
+            else:
+                return HttpResponseRedirect(self.get_success_url())
+
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_success_url(self):
+        return reverse('profile', kwargs={'username': self.request.user.username})
+
+    def get_form(self, *args, **kwargs):
+        form_kwargs = {'instance': self.object}
+        if self.request.method == 'POST':
+            form_kwargs['data'] = self.request.POST
+            form_kwargs['files'] = self.request.FILES
+        return ItemForm(**form_kwargs)
 
 
 class ItemDeleteView(UserPassesTestMixin, DeleteView):

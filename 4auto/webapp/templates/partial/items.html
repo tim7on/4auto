@@ -3,8 +3,12 @@
 <div class="card" id='item_{{ item.pk }}'>
 
     {% if request.user == item.owner %}
-    <div class='delete_overlay'>
-        <a class="delete_btn" data-slug='{{ item.get_absolute_url }}' data-id='{{ item.pk }}'></a>
+    <div class='btn_overlay delete'  title="Удалить">
+        <a class="svg_btn delete_btn" data-slug='{{ item.get_absolute_url }}' data-id='{{ item.pk }}'></a>
+    </div>
+    <div class="btn_overlay update" title="Изменить">
+        <a href="{{ item.get_absolute_url }}update/" class="svg_btn update_btn" data-slug='{{ item.get_absolute_url }}'
+            data-id='{{ item.pk }}'></a>
     </div>
     {% endif %}
 
@@ -14,7 +18,7 @@
     <img class="card_img" src=" {% static 'img/no-image.jpg' %}" style="filter: brightness(0.5);" alt="No Image"
         srcset="">
     {% endif %}
-    
+
     <div class="info">
         <h1>{{ item.name|truncatechars:20 }}</h1>
         <h3>Категория: {{ item.category }}</h3>
@@ -30,5 +34,5 @@
 {% endfor %}
 {% block js %}
 <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
-<script src="{% static 'js/delete.js' %}"></script>
+<script src="{% static 'js/btn_action.js' %}"></script>
 {% endblock js %}

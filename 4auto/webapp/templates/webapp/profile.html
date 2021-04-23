@@ -30,12 +30,12 @@
 
                 <div class="cal">
                     <a class="cal_svg{% if profile.phone %} cal_svg_active {% else %} cal_svg_none {% endif %}"
-                        id="cal_phone" href="tel:{{ profile.phone }}" target="_blank" rel="noopener noreferrer"></a>
+                        id="cal_phone" href="tel:{{ profile.phone }}" data-title="{{ profile.phone }}" target="_blank" rel="noopener noreferrer"></a>
                     <a class="cal_svg{% if profile.insta %} cal_svg_active {% else %} cal_svg_none {% endif %}"
-                        id="cal_insta" href="https://instagram.com/{{ profile.insta }}" target="_blank"
+                        id="cal_insta" href="https://instagram.com/{{ profile.insta }}" data-title="{{ profile.insta }}" target="_blank"
                         rel="noopener noreferrer"></a>
                     <a class="cal_svg{% if profile.whats %} cal_svg_active {% else %} cal_svg_none {% endif %}"
-                        id="cal_whats" href="https://wa.me/{{ profile.whats }}" target="_blank"
+                        id="cal_whats" href="https://wa.me/{{ profile.whats }}" data-title="{{ profile.whats }}"" target="_blank"
                         rel="noopener noreferrer"></a>
                     <a class="cal_svg cal_svg_active" id="cal_new"
                         href="{% url 'item_create' request.user.username %}"></a>

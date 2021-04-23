@@ -400,11 +400,13 @@ img {
     scroll-behavior: smooth;
     white-space: nowrap;
 
+
 }
 
 .scroll_horizontal .new_card {
     max-width: 25rem;
     margin: 0.75rem 0.50rem;
+    white-space: normal;
 }
 
 /* width */
@@ -465,15 +467,12 @@ img {
 
 .info_detail_txt {
     z-index: 1;
+    width: fit-content;
 }
 
 .new_card .info_detail {
-    float: left;
-    flex-wrap: wrap;
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    margin: 1rem;
+    opacity: 1;
+    min-height: 11rem;
 }
 
 .card_img {
@@ -505,6 +504,10 @@ img {
 
 .info_detail p {
     margin-top: 0.25rem;
+}
+
+.area_top {
+    grid-area: 1 / 1;
 }
 
 .price {
@@ -623,13 +626,13 @@ input[type=search]:focus {
     border-radius: 1rem;
 }
 
-.sidebar h1 {
+.sidebar h2 {
     margin: 1rem;
 }
 
 .root {
     color: var(--light);
-    margin: 2rem;
+    margin: 1rem;
 }
 
 .root li {
@@ -781,7 +784,7 @@ input[type=search]:focus {
     background-image: url('../svg/new.svg');
 }
 
-.delete_overlay {
+.btn_overlay {
     position: absolute;
     --lightTrans: #131a22e0;
     justify-content: center;
@@ -796,13 +799,22 @@ input[type=search]:focus {
     transition: box-shadow ease-in 300ms;
 }
 
-.delete_overlay:hover,
-.delete_overlay:focus {
+.delete {
+    top: 0;
+    left: 0;
+}
+.update{
+    top: 0;
+    right: 0;
+}
+.btn_overlay:hover,
+.btn_overlay:focus {
     box-shadow: 0 0 0.75rem 0 var(--Dark);
     transition: box-shadow ease-out 300ms;
 }
 
 .delete_btn {
+    cursor: pointer;
     display: block;
     width: 2rem;
     height: 2rem;
@@ -944,6 +956,33 @@ input[type=submit] {
     border-radius: 100%;
 }
 
+@media (min-width: 600px) {
+    .content_grid {
+        grid-template-columns: repeat(2, 1fr);
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    .card {
+        min-height: 20rem;
+        width: 100%;
+    }
+
+    .info {
+        justify-content: space-between;
+        height: 15rem;
+    }
+
+    .grid_user_detail {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .profile {
+        max-width: 100%;
+        grid-area: 1 / 1 / 1 / span 2;
+    }
+}
+
 @media (min-width: 1150px) {
     .panel {
         max-width: fit-content;
@@ -954,11 +993,6 @@ input[type=submit] {
         grid-template-columns: repeat(2, 25rem);
     }
 
-    .profile {
-        grid-area: 1 / 1 / 1 / span 2;
-        max-width: 100%;
-
-    }
 
     .gridprofile .cal {
         margin-top: 0rem;
@@ -988,39 +1022,15 @@ input[type=submit] {
         grid-area: 1 / 3;
     }
 
-    .content_grid {
-        grid-template-columns: repeat(2, 1fr);
-        justify-content: center;
-        align-items: flex-start;
-    }
-
     .pagination {
         grid-area: 3 / 2;
-    }
-
-    .card {
-        min-height: 20rem;
-        width: 100%;
-    }
-
-    .info_detail {
-        justify-content: space-between;
-        height: auto;
-        padding: 1rem;
-    }
-
-    .profile {
-        width: 100%;
     }
 
     .col1 {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .info {
-        justify-content: space-between;
-        height: 15rem;
-    }
+
 
     #menu_wrap {
         min-width: 20rem;
@@ -1038,12 +1048,6 @@ input[type=submit] {
         max-width: 100%;
         display: grid;
         grid-template-columns: 280px auto 280px;
-    }
-
-    .grid_user_detail {
-
-        grid-template-columns: repeat(2, 1fr);
-
     }
 }
 

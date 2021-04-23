@@ -105,7 +105,7 @@ img {
 }
 
 .new_content {
-    margin: 1rem;
+    margin: 0rem 1rem;
     bottom: 5rem;
 }
 
@@ -113,7 +113,7 @@ img {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 2rem 1.5rem;
+    margin: 8rem 1.5rem 1.5rem 1rem;
 }
 
 #main_search {
@@ -626,13 +626,13 @@ input[type=search]:focus {
     border-radius: 1rem;
 }
 
-.sidebar h1 {
+.sidebar h2 {
     margin: 1rem;
 }
 
 .root {
     color: var(--light);
-    margin: 2rem;
+    margin: 1rem;
 }
 
 .root li {
@@ -732,6 +732,7 @@ input[type=search]:focus {
 
 .gridprofile .cal a {
     background-color: var(--accent);
+    position: relative;
     color: var(--Background);
     justify-content: center;
     text-align: center;
@@ -784,35 +785,56 @@ input[type=search]:focus {
     background-image: url('../svg/new.svg');
 }
 
-.delete_overlay {
+.btn_overlay {
+    --Background: #232f3ea4;
     position: absolute;
-    --lightTrans: #131a22e0;
     justify-content: center;
     align-items: center;
     margin: 0.5rem;
     width: 2.5rem;
     height: 2.5rem;
-    background: var(--lightTrans);
+    background: var(--Background);
+    padding: 0;
     border-radius: 100%;
     z-index: 1;
-    box-shadow: 0 0 0 0 var(--Dark);
-    transition: box-shadow ease-in 300ms;
+    box-shadow: 0 0 0 0 var(--Background);
+    transition: box-shadow ease-in 250ms, border-radius 250ms ease-in 250ms, padding 250ms ease-in 250ms;
 }
 
-.delete_overlay:hover,
-.delete_overlay:focus {
-    box-shadow: 0 0 0.75rem 0 var(--Dark);
-    transition: box-shadow ease-out 300ms;
+.delete {
+    top: 0;
+    left: 0;
 }
 
-.delete_btn {
+.update {
+    top: 0;
+    right: 0;
+}
+
+.btn_overlay:hover,
+.btn_overlay:focus {
+    box-shadow: 0 0 0.75rem 0 var(--Background);
+    padding: 0.5rem;
+    border-radius: 1rem;
+    transition: box-shadow 250ms ease-out 250ms, border-radius ease-out 250ms, padding ease-out 250ms;
+}
+
+.svg_btn {
     cursor: pointer;
     display: block;
     width: 2rem;
     height: 2rem;
     margin: 0.25rem;
-    background: url(../svg/delete.svg) no-repeat center;
     z-index: 2;
+}
+
+.delete_btn {
+    background: url(../svg/delete.svg) no-repeat center;
+
+}
+
+.update_btn {
+    background: url(../svg/edit.svg) no-repeat center;
 }
 
 .panel {
@@ -948,6 +970,47 @@ input[type=submit] {
     border-radius: 100%;
 }
 
+@media (min-width: 600px) {
+    .content_grid {
+        grid-template-columns: repeat(2, 1fr);
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    .cal_svg[data-title]:hover::after {
+        --Background: var(--light);
+        content: attr(data-title);
+        position: absolute;
+        background: var(--Background);
+        border-radius: 1rem;
+        font-weight: bold;
+        color: var(--Dark);
+        padding: 1rem;
+        top: -100%;
+        left: 0;
+        z-index: 10;
+    }
+
+    .card {
+        min-height: 20rem;
+        width: 100%;
+    }
+
+    .info {
+        justify-content: space-between;
+        height: 15rem;
+    }
+
+    .grid_user_detail {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .profile {
+        max-width: 100%;
+        grid-area: 1 / 1 / 1 / span 2;
+    }
+}
+
 @media (min-width: 1150px) {
     .panel {
         max-width: fit-content;
@@ -958,11 +1021,6 @@ input[type=submit] {
         grid-template-columns: repeat(2, 25rem);
     }
 
-    .profile {
-        grid-area: 1 / 1 / 1 / span 2;
-        max-width: 100%;
-
-    }
 
     .gridprofile .cal {
         margin-top: 0rem;
@@ -992,39 +1050,15 @@ input[type=submit] {
         grid-area: 1 / 3;
     }
 
-    .content_grid {
-        grid-template-columns: repeat(2, 1fr);
-        justify-content: center;
-        align-items: flex-start;
-    }
-
     .pagination {
         grid-area: 3 / 2;
-    }
-
-    .card {
-        min-height: 20rem;
-        width: 100%;
-    }
-
-    .info_detail {
-        justify-content: space-between;
-        height: auto;
-        padding: 1rem;
-    }
-
-    .profile {
-        width: 100%;
     }
 
     .col1 {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .info {
-        justify-content: space-between;
-        height: 15rem;
-    }
+
 
     #menu_wrap {
         min-width: 20rem;
@@ -1042,12 +1076,6 @@ input[type=submit] {
         max-width: 100%;
         display: grid;
         grid-template-columns: 280px auto 280px;
-    }
-
-    .grid_user_detail {
-
-        grid-template-columns: repeat(2, 1fr);
-
     }
 }
 
