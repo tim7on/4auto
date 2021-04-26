@@ -105,15 +105,26 @@ img {
 }
 
 .new_content {
-    margin: 1rem;
+    margin: 0rem 1rem;
     bottom: 5rem;
+}
+
+.logoindex {
+    position: absolute;
+    top: 3.5rem;
+    left: 0;
+    width: 8rem;
+    height: 8rem;
+    margin: 1rem;
+    z-index: -1;
+    opacity: 0.5;
 }
 
 .search_overlay {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 2rem 1.5rem;
+    margin: 8rem 1.5rem 1.5rem 1rem;
 }
 
 #main_search {
@@ -732,6 +743,7 @@ input[type=search]:focus {
 
 .gridprofile .cal a {
     background-color: var(--accent);
+    position: relative;
     color: var(--Background);
     justify-content: center;
     text-align: center;
@@ -785,42 +797,55 @@ input[type=search]:focus {
 }
 
 .btn_overlay {
+    --Background: #232f3ea4;
     position: absolute;
-    --lightTrans: #131a22e0;
     justify-content: center;
     align-items: center;
     margin: 0.5rem;
     width: 2.5rem;
     height: 2.5rem;
-    background: var(--lightTrans);
+    background: var(--Background);
+    padding: 0;
     border-radius: 100%;
     z-index: 1;
-    box-shadow: 0 0 0 0 var(--Dark);
-    transition: box-shadow ease-in 300ms;
+    box-shadow: 0 0 0 0 var(--Background);
+    transition: box-shadow ease-in 250ms, border-radius 250ms ease-in 250ms, padding 250ms ease-in 250ms;
 }
 
 .delete {
     top: 0;
     left: 0;
 }
-.update{
+
+.update {
     top: 0;
     right: 0;
 }
+
 .btn_overlay:hover,
 .btn_overlay:focus {
-    box-shadow: 0 0 0.75rem 0 var(--Dark);
-    transition: box-shadow ease-out 300ms;
+    box-shadow: 0 0 0.75rem 0 var(--Background);
+    padding: 0.5rem;
+    border-radius: 1rem;
+    transition: box-shadow 250ms ease-out 250ms, border-radius ease-out 250ms, padding ease-out 250ms;
 }
 
-.delete_btn {
+.svg_btn {
     cursor: pointer;
     display: block;
     width: 2rem;
     height: 2rem;
     margin: 0.25rem;
-    background: url(../svg/delete.svg) no-repeat center;
     z-index: 2;
+}
+
+.delete_btn {
+    background: url(../svg/delete.svg) no-repeat center;
+
+}
+
+.update_btn {
+    background: url(../svg/edit.svg) no-repeat center;
 }
 
 .panel {
@@ -957,10 +982,28 @@ input[type=submit] {
 }
 
 @media (min-width: 600px) {
+    .logoindex {
+        width: 15rem;
+        height: 15rem;
+    }
     .content_grid {
         grid-template-columns: repeat(2, 1fr);
         justify-content: center;
         align-items: flex-start;
+    }
+
+    .cal_svg[data-title]:hover::after {
+        --Background: var(--light);
+        content: attr(data-title);
+        position: absolute;
+        background: var(--Background);
+        border-radius: 1rem;
+        font-weight: bold;
+        color: var(--Dark);
+        padding: 1rem;
+        top: -100%;
+        left: 0;
+        z-index: 10;
     }
 
     .card {

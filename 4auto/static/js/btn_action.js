@@ -50,27 +50,6 @@ function deletePost(item) {
     }
 }
 
-function updatePost(item) {
-    let slug = item.getAttribute('data-slug'),
-        pk = item.getAttribute('data-id'),
-        card = document.querySelector('#item_' + pk),
-        url = slug + 'update/';
-
-    $.ajax({
-        method: 'POST',
-        url: url,
-        dataType: 'json',
-        success: function (data) {
-            card.remove();
-        }
-    });
-
-}
-// updateBtn.forEach(element => {
-//     element.addEventListener('click', e => {
-//         updatePost(e.currentTarget);
-//     });
-// });
 deleteBtn.forEach(element => {
     element.addEventListener('click', e => {
         deletePost(e.currentTarget);
