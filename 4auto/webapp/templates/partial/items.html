@@ -3,12 +3,18 @@
 <div class="card" id='item_{{ item.pk }}'>
 
     {% if request.user == item.owner %}
-    <div class='btn_overlay delete'  title="Удалить">
-        <a class="svg_btn delete_btn" data-slug='{{ item.get_absolute_url }}' data-id='{{ item.pk }}'></a>
-    </div>
-    <div class="btn_overlay update" title="Изменить">
-        <a href="{{ item.get_absolute_url }}update/" class="svg_btn update_btn" data-slug='{{ item.get_absolute_url }}'
-            data-id='{{ item.pk }}'></a>
+    <div class="post_actions">
+        <div class='btn_overlay delete' title="Удалить">
+            <a class="svg_btn delete_btn" data-slug='{{ item.get_absolute_url }}' data-id='{{ item.pk }}'></a>
+        </div>
+        <div class="btn_overlay update" title="Изменить">
+            <a href="{{ item.get_absolute_url }}update/" class="svg_btn edit_btn"
+                data-slug='{{ item.get_absolute_url }}' data-id='{{ item.pk }}'></a>
+        </div>
+        <div class="btn_overlay update" title="Поднять пост">
+            <a href="{{ item.get_absolute_url }}update/" class="svg_btn update_btn"
+                data-slug='{{ item.get_absolute_url }}' data-id='{{ item.pk }}'></a>
+        </div>
     </div>
     {% endif %}
 
@@ -20,16 +26,14 @@
     {% endif %}
 
     <div class="info">
-        <h1>{{ item.name|truncatechars:20 }}</h1>
-        <h3>Категория: {{ item.category }}</h3>
-        <p>Теги: Скоро добавлю</p>
-        <p>{{ item.description|truncatechars:75 }}</p>
+        <h3>{{ item.name|truncatechars:29 }}</h3>
+        <p>{{ item.description|truncatechars:105 }}</p>
         <br>
         <a class="link" href="{{ item.owner.profile.get_absolute_url }}">@{{ item.owner }}</a>
-        <p> Цена: <strong class="price">{{ item.price}}</strong></p>
+        <p><strong class="price">{{ item.price}}</strong> сом</p>
         <p>{{item.created|date:"d M Y" }}</p>
     </div>
-    <a href="{{ item.get_absolute_url }}" class="btn_rght">Подробнее</a>
+    <a href="{{ item.get_absolute_url }}" class="btn_rght pad_off">Подробнее</a>
 </div>
 {% endfor %}
 {% block js %}

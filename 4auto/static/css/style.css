@@ -1,8 +1,8 @@
 :root {
     --Dark: #131A22;
-    --grey: #cacfd6;
     --Background: #232F3E;
     --lightDark: #36465a;
+    --grey: #cacfd6;
     --light: #E2E5E9;
     --lightTrans: #e2e5e98e;
     --accent: #FF9900;
@@ -107,17 +107,6 @@ img {
 .new_content {
     margin: 0rem 1rem;
     bottom: 5rem;
-}
-
-.logoindex {
-    position: absolute;
-    top: 3.5rem;
-    left: 0;
-    width: 8rem;
-    height: 8rem;
-    margin: 1rem;
-    z-index: -1;
-    opacity: 0.5;
 }
 
 .search_overlay {
@@ -249,18 +238,32 @@ img {
 
 }
 
-#menu_wrap ul {
-    margin: 1rem auto;
+#menu_wrap .search_form .search_overlay {
+    --lightDark: var(--Background);
+    margin: 0 auto ;
+    width: 50%;
+}
+
+#list_wrap {
+    margin: 10rem auto;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-self: center;
-    height: 80%;
+    height: 60%;
     width: fit-content;
-
 }
 
-#menu_wrap ul li {
+#list_wrap ul {    margin: 1rem auto;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    width: fit-content;}
+
+#list_wrap ul li {
     margin: 1rem;
     size: 2rem;
 }
@@ -982,10 +985,6 @@ input[type=submit] {
 }
 
 @media (min-width: 600px) {
-    .logoindex {
-        width: 15rem;
-        height: 15rem;
-    }
     .content_grid {
         grid-template-columns: repeat(2, 1fr);
         justify-content: center;
