@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG")
+DEBUG = int(os.environ.get('DEBUG', 1))
 
 # Application definition
 
@@ -132,7 +132,7 @@ LOGIN_URL = 'accounts:login'
 
 # docker-compose logs -f (Смотреть логи)
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-ACTIVATE_USERS_EMAIL = os.environ.get("ACTIVATE_USERS_EMAIL", "True")
+ACTIVATE_USERS_EMAIL = int(os.environ.get('ACTIVATE_USERS_EMAIL', 1))
 BASE_HOST = 'localhost:8000'
 
 REST_FRAMEWORK = {

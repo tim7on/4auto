@@ -15,7 +15,6 @@ from accounts.forms import MyUserCreationForm, UserChangeForm, ProfileChangeForm
     PasswordChangeForm, PasswordResetEmailForm, PasswordResetForm
 from .models import AuthToken, Profile
 from django.http import HttpResponse, JsonResponse
-import os
 
 
 class RegisterView(CreateView):

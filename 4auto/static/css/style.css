@@ -1,8 +1,8 @@
 :root {
     --Dark: #131A22;
+    --grey: #cacfd6;
     --Background: #232F3E;
     --lightDark: #36465a;
-    --grey: #cacfd6;
     --light: #E2E5E9;
     --lightTrans: #e2e5e98e;
     --accent: #FF9900;
@@ -114,6 +114,12 @@ img {
     justify-content: center;
     align-items: center;
     margin: 8rem 1.5rem 1.5rem 1rem;
+}
+
+#list_wrap .search_form .search_overlay {
+    --lightDark: var(--Background);
+    width: 55%;
+    margin: 8rem auto auto auto;
 }
 
 #main_search {
@@ -238,32 +244,19 @@ img {
 
 }
 
-#menu_wrap .search_form .search_overlay {
-    --lightDark: var(--Background);
-    margin: 0 auto ;
-    width: 50%;
-}
-
-#list_wrap {
-    margin: 10rem auto;
+#menu_wrap ul {
+    margin: 1rem auto;
     max-width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-self: center;
-    height: 60%;
+    height: 80%;
     width: fit-content;
+
 }
 
-#list_wrap ul {    margin: 1rem auto;
-    max-width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-self: center;
-    width: fit-content;}
-
-#list_wrap ul li {
+#menu_wrap ul li {
     margin: 1rem;
     size: 2rem;
 }
@@ -451,11 +444,28 @@ img {
 }
 
 .card {
-    min-height: 20rem;
+    width: 100%;
     position: relative;
+    display: inline-flex;
     color: var(--light);
     background-color: var(--Background);
+    min-height: 10.5rem;
     border-radius: 1rem;
+}
+.col2_grid .card {
+    display: block;
+}
+.card_img {
+    border-radius: 1rem 0rem 0rem 1rem;
+    width: 6rem;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 1rem;
+
 }
 
 .new_card {
@@ -489,23 +499,10 @@ img {
     min-height: 11rem;
 }
 
-.card_img {
-    border-radius: 1rem 1rem 0rem 0rem;
-    height: 10rem;
-    width: 100%;
-}
-
 .detail_img {
     border-radius: 1rem 1rem 0rem 0rem;
     height: 25rem;
     width: 100%;
-}
-
-.info {
-    display: flex;
-    flex-direction: column;
-    padding: 1rem;
-
 }
 
 .info_detail {
@@ -799,9 +796,17 @@ input[type=search]:focus {
     background-image: url('../svg/new.svg');
 }
 
+.post_actions {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    margin: auto 5%;
+}
+
 .btn_overlay {
     --Background: #232f3ea4;
-    position: absolute;
     justify-content: center;
     align-items: center;
     margin: 0.5rem;
@@ -812,7 +817,7 @@ input[type=search]:focus {
     border-radius: 100%;
     z-index: 1;
     box-shadow: 0 0 0 0 var(--Background);
-    transition: box-shadow ease-in 250ms, border-radius 250ms ease-in 250ms, padding 250ms ease-in 250ms;
+    transition: box-shadow ease-in 250ms, background 250ms ease-in 250ms;
 }
 
 .delete {
@@ -827,10 +832,10 @@ input[type=search]:focus {
 
 .btn_overlay:hover,
 .btn_overlay:focus {
+    --Background:  #ff99008e;
     box-shadow: 0 0 0.75rem 0 var(--Background);
-    padding: 0.5rem;
-    border-radius: 1rem;
-    transition: box-shadow 250ms ease-out 250ms, border-radius ease-out 250ms, padding ease-out 250ms;
+    background: var(--Background);
+    transition: box-shadow 250ms ease-out 250ms, background ease-out 250ms;
 }
 
 .svg_btn {
@@ -847,10 +852,12 @@ input[type=search]:focus {
 
 }
 
-.update_btn {
+.edit_btn {
     background: url(../svg/edit.svg) no-repeat center;
 }
-
+.update_btn {
+    background: url(../svg/update.svg) no-repeat center;
+}
 .panel {
     position: relative;
     align-self: center;
@@ -1006,13 +1013,25 @@ input[type=submit] {
     }
 
     .card {
+        display: block;
         min-height: 20rem;
         width: 100%;
     }
 
+    .post_actions {
+        flex-direction: row;
+        width: 100%;
+        margin: 0;
+    }
+
+    .card_img {
+        border-radius: 1rem 1rem 0rem 0rem;
+        height: 10.5rem;
+        width: 100%;
+    }
+
     .info {
-        justify-content: space-between;
-        height: 15rem;
+        height: 10rem;
     }
 
     .grid_user_detail {
@@ -1091,6 +1110,7 @@ input[type=submit] {
         display: grid;
         grid-template-columns: 280px auto 280px;
     }
+
 }
 
 @media (min-width: 1600px) {
