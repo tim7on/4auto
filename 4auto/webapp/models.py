@@ -33,6 +33,11 @@ class Category(MPTTModel):
     def __str__(self):
         return self.name
 
+CURRENCY_TYPE_CHOICES = (
+    ('Сом', 'Сом'),
+    ('$', '$')
+)
+
 
 class Item(models.Model):
     owner = models.ForeignKey(get_user_model(), verbose_name=_(
@@ -42,10 +47,11 @@ class Item(models.Model):
         "webapp.Category", verbose_name=_("Категории"), on_delete=models.CASCADE)
     photo = models.ImageField(verbose_name=_(
         "Фото"), upload_to="items_photo", null=True, blank=True)
-
     description = models.TextField(verbose_name=_("Описание"))
     price = models.DecimalField(verbose_name=_(
         'Цена'), max_digits=9, decimal_places=0)
+    currency = models.CharField(max_length=5, choices=CURRENCY_TYPE_CHOICES,
+                                default='Сом', verbose_name=_("Валюта"))
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(null=True, blank=True)
 
@@ -58,3 +64,10 @@ class Item(models.Model):
 
     def get_absolute_url(self):
         return reverse('item_view', kwargs={'owner': self.owner, 'pk': self.pk})
+
+
+class Paid(models.Model):
+    status = models.BooleanField(
+        default=False, verbose_name=_("Статус подписки"))
+    started_at = models.DateTimeField(null=True, blank=True)
+    ended_at = models.DateTimeField(null=True, blank=True)

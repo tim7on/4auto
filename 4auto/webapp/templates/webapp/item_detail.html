@@ -13,20 +13,22 @@
                 src="{% if profile.avatar %} {{profile.avatar.url}} {% else %} {% static 'img/avatar.png' %} {% endif %}"
                 alt="">
             <div class="txt1">
-                <h2 class="txt2"><a class="link" href="{{ item.owner.profile.get_absolute_url }}">@{{ item.owner }}</a></h2>
+                <h2 class="txt2"><a class="link" href="{{ item.owner.profile.get_absolute_url }}">@{{ item.owner }}</a>
+                </h2>
                 <p class="txt2"> <strong>Адрес: </strong>{{ profile.adress}}</p>
                 <p class="txt2"><strong> Расписание: </strong>{{ profile.schedule }}</p>
             </div>
 
             <div class="cal">
                 <a class="cal_svg{% if profile.phone %} cal_svg_active {% else %} cal_svg_none {% endif %}"
-                    id="cal_phone" href="tel:{{ profile.phone }}" target="_blank" rel="noopener noreferrer"></a>
+                    id="cal_phone" href="tel:{{ profile.phone }}" data-title="{{ profile.phone }}" target="_blank"
+                    rel="noopener noreferrer"></a>
                 <a class="cal_svg{% if profile.insta %} cal_svg_active {% else %} cal_svg_none {% endif %}"
-                    id="cal_insta" href="https://instagram.com/{{ profile.insta }}" target="_blank"
-                    rel="noopener noreferrer"></a>
+                    id="cal_insta" href="https://instagram.com/{{ profile.insta }}" data-title="{{ profile.insta }}"
+                    target="_blank" rel="noopener noreferrer"></a>
                 <a class="cal_svg{% if profile.whats %} cal_svg_active {% else %} cal_svg_none {% endif %}"
-                    id="cal_whats" href="https://wa.me/{{ profile.whats }}" target="_blank"
-                    rel="noopener noreferrer"></a>
+                    id="cal_whats" href="https://wa.me/{{ profile.whats }}" data-title="{{ profile.whats }}"" target="
+                    _blank" rel="noopener noreferrer"></a>
             </div>
             <br>
         </div>
@@ -56,7 +58,7 @@
                 <br>
                 <hr>
                 <br>
-                <p> Цена: <strong class="price">{{ item.price}}</strong></p>
+                <p> Цена: <strong class="price">{{ item.price}}</strong> {{ item.currency}}</p>
                 <p>{{item.created|date:"d M Y" }}</p>
             </div>
             <a id="connect" class="btn_rght">Связаться</a>

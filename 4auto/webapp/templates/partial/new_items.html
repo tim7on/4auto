@@ -13,7 +13,7 @@
         <p class="info_detail_txt ">{{ item.description|truncatechars:75 }}</p>
         <br class="info_detail_txt ">
         <a class="info_detail_txt link" href="{{ item.owner.profile.get_absolute_url }}">@{{ item.owner }}</a>
-        <p class="info_detail_txt "><strong class="price">{{ item.price}}</strong> сом</p>
+        <p class="info_detail_txt "><strong class="price">{{ item.price}}</strong> {{ item.currency}}</p>
     </div>
     <a href="{{ item.get_absolute_url }}" class="btn_rght">Подробнее</a>
 </div>
