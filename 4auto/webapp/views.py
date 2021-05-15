@@ -30,6 +30,9 @@ class IndexView(ListView):
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
         context['new_items'] = Item.objects.all().order_by('-created')[:8]
+        context['paid_items'] = Item.objects.filter(
+            owner__profile__expired__gte=timezone.now()).order_by('-created')[:8]
+        print(context['paid_items'])
         return context
 
 

@@ -5,7 +5,7 @@ from .models import Category, Item
 
 class CategoryAdmin(DraggableMPTTAdmin):
     mptt_indent_field = "name"
-    list_display = ('tree_actions', 'indented_title','slug',
+    list_display = ('tree_actions', 'indented_title', 'slug',
                     'related_products_count', 'related_products_cumulative_count')
     list_display_links = ('indented_title',)
     prepopulated_fields = {'slug': ('name',), }

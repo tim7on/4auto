@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 from django.contrib.auth import get_user_model
 from uuid import uuid4
@@ -59,7 +60,8 @@ class Profile(models.Model):
 
     user: AbstractUser = models.OneToOneField(get_user_model(), related_name='profile',
                                               on_delete=models.CASCADE, verbose_name='Пользователь')
-
+    expired = models.DateTimeField(
+        null=True, blank=True, verbose_name=_('Окончание вип статуса'))
     adress = models.CharField(
         max_length=50, verbose_name=_("Адрес"), null=True, blank=True)
     schedule = models.CharField(max_length=50, verbose_name=_(
@@ -74,7 +76,7 @@ class Profile(models.Model):
         validators=[insta_regex], verbose_name="Instagram", max_length=31, blank=True, null=True)
 
     def __str__(self):
-        return self.user.username + "Профиль"
+        return self.user.username + " Профиль"
 
     class Meta:
         verbose_name = 'Профиль'
@@ -82,3 +84,8 @@ class Profile(models.Model):
 
     def get_absolute_url(self):
         return reverse('profile', kwargs={'username': self.user.username})
+
+    def status_vip(self, current_date=datetime.date.today()):
+        if self.expired is None:
+            return False
+        return current_date < self.expired

@@ -33,6 +33,7 @@ class Category(MPTTModel):
     def __str__(self):
         return self.name
 
+
 CURRENCY_TYPE_CHOICES = (
     ('Сом', 'Сом'),
     ('$', '$')
@@ -66,8 +67,3 @@ class Item(models.Model):
         return reverse('item_view', kwargs={'owner': self.owner, 'pk': self.pk})
 
 
-class Paid(models.Model):
-    status = models.BooleanField(
-        default=False, verbose_name=_("Статус подписки"))
-    started_at = models.DateTimeField(null=True, blank=True)
-    ended_at = models.DateTimeField(null=True, blank=True)
