@@ -59,14 +59,15 @@ function upPost(item) {
         method: 'POST',
         url: url,
         dataType: 'json',
-        success: function (data) {}
+        success: function () {
+            location.reload();
+        }
     });
 
 }
 upBtn.forEach(element => {
     element.addEventListener('click', e => {
         upPost(e.target);
-        location.reload();
     });
 });
 deleteBtn.forEach(element => {
