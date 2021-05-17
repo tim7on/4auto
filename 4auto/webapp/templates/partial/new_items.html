@@ -9,7 +9,7 @@
     {% endif %}
     <div class="info_detail">
         <h2 class="info_detail_txt ">{{ item.name|truncatechars:25 }}</h2>
-        <h3 class="info_detail_txt ">Категория: {{ item.category }}</h3>
+        <h3 class="info_detail_txt ">Категория: <a href="{{ item.category.get_absolute_url }}">{{ item.category }}</a></h3>
         <p class="info_detail_txt ">{{ item.description|truncatechars:75 }}</p>
         <br class="info_detail_txt ">
         <a class="info_detail_txt link" href="{{ item.owner.profile.get_absolute_url }}">@{{ item.owner }}</a>

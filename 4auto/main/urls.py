@@ -21,5 +21,7 @@ urlpatterns = [
 
     path('u/<str:owner>/item/<int:pk>/', ItemDetailView.as_view(), name='item_view'),
     path('u/<str:owner>/item/<int:pk>/update/', ItemUpdateView.as_view(), name='item_update'),
+    path('u/<str:owner>/item/<int:pk>/up/', ItemUpUpdateView.as_view(), name='item_up'),
     path('u/<str:owner>/item/<int:pk>/delete/', ItemDeleteView.as_view(), name='item_delete'),
+    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

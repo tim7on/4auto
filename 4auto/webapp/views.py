@@ -29,10 +29,9 @@ class IndexView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
-        context['new_items'] = Item.objects.all().order_by('-created')[:8]
+        context['new_items'] = Item.objects.all().order_by('-updated')[:8]
         context['paid_items'] = Item.objects.filter(
-            owner__profile__expired__gte=timezone.now()).order_by('-created')[:8]
-        print(context['paid_items'])
+            owner__profile__expired__gte=timezone.now()).order_by('-updated')[:8]
         return context
 
 
@@ -47,7 +46,7 @@ class AllCategory(ListView):
     context_object_name = 'items'
 
     def get_queryset(self):
-        queryset = Item.objects.all().order_by('-created')
+        queryset = Item.objects.all().order_by('-updated')
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -71,7 +70,7 @@ class CategoryListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(CategoryListView, self).get_context_data(**kwargs)
-        context['items'] = self.get_queryset().order_by('-created')
+        context['items'] = self.get_queryset().order_by('-updated')
         context['category'] = Category.objects.all()
 
         return context
@@ -87,7 +86,7 @@ class ItemDetailView(DetailView):
         context['profile'] = Profile.objects.get(
             user__username=self.kwargs['owner'])
         context['new_items'] = Item.objects.exclude(
-            id=self.kwargs['pk']).order_by('-created')[:3]
+            id=self.kwargs['pk']).order_by('-updated')[:3]
         return context
 
 
@@ -102,8 +101,7 @@ class ProfileDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(ProfileDetailView, self).get_context_data(**kwargs)
         context['object_list'] = Item.objects.filter(
-            owner__username=self.kwargs['username']).order_by('-created')
-        print(context)
+            owner__username=self.kwargs['username']).order_by('-updated')
         return context
 
 
@@ -113,6 +111,7 @@ class ItemCreateView(LoginRequiredMixin, FormView):
 
     def form_valid(self, form):
         form.instance.owner = self.request.user
+        form.instance.updated = timezone.now()
         form.save()
         return HttpResponseRedirect(self.get_success_url())
 
@@ -151,6 +150,21 @@ class ItemUpdateView(UserPassesTestMixin, UpdateView):
         return ItemForm(**form_kwargs)
 
 
+class ItemUpUpdateView(UserPassesTestMixin, UpdateView):
+    '''Update time of item to Up'''
+    model = Item
+
+    def test_func(self):
+        return self.request.user == self.get_object().owner
+
+    def post(self, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.updated = timezone.now()
+        self.object.save()
+        data = {'success': 'OK'}
+        return JsonResponse(data)
+
+
 class ItemDeleteView(UserPassesTestMixin, DeleteView):
     model = Item
 
@@ -159,7 +173,6 @@ class ItemDeleteView(UserPassesTestMixin, DeleteView):
 
     def post(self, *args, **kwargs):
         self.object = self.get_object()
-        print(self.object)
         self.object.delete()
         data = {'success': 'OK'}
         return JsonResponse(data)
@@ -204,7 +217,7 @@ class Search(ListView):
                 query_string, ['name', 'description', ])
 
             found_entries = Item.objects.filter(
-                entry_query).order_by('-created')
+                entry_query).order_by('-updated')
         else:
             found_entries = Item.objects.none()
         return found_entries

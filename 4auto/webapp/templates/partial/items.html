@@ -4,16 +4,17 @@
 
     {% if request.user == item.owner %}
     <div class="post_actions">
-        <div class='btn_overlay delete' title="Удалить">
-            <a class="svg_btn delete_btn" data-slug='{{ item.get_absolute_url }}' data-id='{{ item.pk }}'></a>
+        <div class='btn_overlay delete'>
+            <a class="svg_btn delete_btn" data-slug='{{ item.get_absolute_url }}' data-id='{{ item.pk }}'
+                title="Удалить"></a>
         </div>
-        <div class="btn_overlay update" title="Изменить">
+        <div class="btn_overlay update">
             <a href="{{ item.get_absolute_url }}update/" class="svg_btn edit_btn"
-                data-slug='{{ item.get_absolute_url }}' data-id='{{ item.pk }}'></a>
+                data-slug='{{ item.get_absolute_url }}' data-id='{{ item.pk }}' title="Изменить"></a>
         </div>
-        <div class="btn_overlay update" title="Поднять пост">
-            <a href="{{ item.get_absolute_url }}update/" class="svg_btn update_btn"
-                data-slug='{{ item.get_absolute_url }}' data-id='{{ item.pk }}'></a>
+        <div class="btn_overlay up">
+            <a class="svg_btn update_btn" data-slug='{{ item.get_absolute_url }}' data-id='{{ item.pk }}'
+                title="Поднять пост"></a>
         </div>
     </div>
     {% endif %}
@@ -31,7 +32,7 @@
         <br>
         <a class="link" href="{{ item.owner.profile.get_absolute_url }}">@{{ item.owner }}</a>
         <p><strong class="price">{{ item.price}}</strong> {{ item.currency}}</p>
-        <p>{{item.created|date:"d M Y" }}</p>
+        <p>{{item.updated|date:"d M Y" }}</p>
     </div>
     <a href="{{ item.get_absolute_url }}" class="btn_rght pad_off">Подробнее</a>
 </div>

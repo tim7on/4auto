@@ -1,6 +1,6 @@
 "use strict";
 let deleteBtn = document.querySelectorAll('.delete'),
-    updateBtn = document.querySelectorAll('.update');
+    upBtn = document.querySelectorAll('.up');
 
 function getCookie(name) {
     let cookieValue = null;
@@ -37,6 +37,8 @@ function deletePost(item) {
         pk = item.getAttribute('data-id'),
         card = document.querySelector('#item_' + pk),
         url = slug + 'delete/';
+    console.log(slug);
+    console.log(url);
 
     if (action != false) {
         $.ajax({
@@ -50,8 +52,26 @@ function deletePost(item) {
     }
 }
 
+function upPost(item) {
+    let slug = item.getAttribute('data-slug'),
+        url = slug + 'up/';
+    $.ajax({
+        method: 'POST',
+        url: url,
+        dataType: 'json',
+        success: function (data) {}
+    });
+
+}
+upBtn.forEach(element => {
+    element.addEventListener('click', e => {
+        upPost(e.target);
+        location.reload();
+    });
+});
 deleteBtn.forEach(element => {
     element.addEventListener('click', e => {
-        deletePost(e.currentTarget);
+        deletePost(e.target);
     });
+
 });
