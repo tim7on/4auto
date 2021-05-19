@@ -80,7 +80,6 @@ class ItemDetailView(DetailView):
     ''' DetailView of Item '''
     model = Item
     template_name = 'webapp/item_detail.html'
-
     def get_context_data(self, **kwargs):
         context = super(ItemDetailView, self).get_context_data(**kwargs)
         context['profile'] = Profile.objects.get(
@@ -94,7 +93,7 @@ class ProfileDetailView(DetailView):
     model = Profile
     template_name = "webapp/profile.html"
     paginate_by = 6
-
+    
     def get_object(self, queryset=None):
         return Profile.objects.get(user__username=self.kwargs.get("username"))
 
@@ -158,9 +157,14 @@ class ItemUpUpdateView(UserPassesTestMixin, UpdateView):
         return self.request.user == self.get_object().owner
 
     def post(self, *args, **kwargs):
-        self.object = self.get_object()
-        self.object.updated = timezone.now()
-        self.object.save()
+        profile = Profile.objects.get(user__username=self.get_object().owner)
+        if profile.up_counter < 5:
+            self.object = self.get_object()
+            self.object.updated = timezone.now()
+            self.object.save()
+            profile.up_counter = profile.up_counter + 1
+            profile.save()
+            print(profile.up_counter)
         data = {'success': 'OK'}
         return JsonResponse(data)
 

@@ -62,6 +62,8 @@ class Profile(models.Model):
                                               on_delete=models.CASCADE, verbose_name='Пользователь')
     expired = models.DateTimeField(
         null=True, blank=True, verbose_name=_('Окончание вип статуса'))
+    up_counter = models.IntegerField(
+        default=0, verbose_name=_("Количество апов"))
     adress = models.CharField(
         max_length=50, verbose_name=_("Адрес"), null=True, blank=True)
     schedule = models.CharField(max_length=50, verbose_name=_(
@@ -85,7 +87,7 @@ class Profile(models.Model):
     def get_absolute_url(self):
         return reverse('profile', kwargs={'username': self.user.username})
 
-    def status_vip(self, current_date=datetime.date.today()):
+    def status_vip(self, current_date=now()):
         if self.expired is None:
             return False
         return current_date < self.expired
