@@ -58,7 +58,7 @@ class UserChangeForm(forms.ModelForm):
 class ProfileChangeForm(forms.ModelForm):
     class Meta:
         model = Profile
-        exclude = ['user', 'expired']
+        exclude = ['user', 'expired', 'up_counter']
         widgets = {
             'phone': forms.TextInput(attrs={'placeholder': '+996 (777) 777-777'}),
             'whats': forms.TextInput(attrs={'placeholder': '+996 (777) 777-777'}),
