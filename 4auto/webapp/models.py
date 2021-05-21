@@ -55,6 +55,7 @@ class Item(models.Model):
                                 default='Сом', verbose_name=_("Валюта"))
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(null=True, blank=True)
+    viewed = models.IntegerField(default=0, verbose_name=_("Просмотры"))
 
     class Meta:
         verbose_name = 'Товар'

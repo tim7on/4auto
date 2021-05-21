@@ -80,6 +80,7 @@ class ItemDetailView(DetailView):
     ''' DetailView of Item '''
     model = Item
     template_name = 'webapp/item_detail.html'
+
     def get_context_data(self, **kwargs):
         context = super(ItemDetailView, self).get_context_data(**kwargs)
         context['profile'] = Profile.objects.get(
@@ -88,12 +89,18 @@ class ItemDetailView(DetailView):
             id=self.kwargs['pk']).order_by('-updated')[:3]
         return context
 
+    def get_object(self, queryset=None):
+        item = super().get_object(queryset)
+        item.viewed = item.viewed + 1
+        item.save()
+        return item
+
 
 class ProfileDetailView(DetailView):
     model = Profile
     template_name = "webapp/profile.html"
     paginate_by = 6
-    
+
     def get_object(self, queryset=None):
         return Profile.objects.get(user__username=self.kwargs.get("username"))
 
