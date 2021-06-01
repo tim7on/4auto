@@ -4,7 +4,8 @@
 {% block content %}
 <form class="search_form" action="{% url 'search' %}" method='get'>
     <div class="search_overlay">
-        <input type="search" name="q" placeholder="{% if q %}{{ get.q }}{% else %} Введите название... {% endif %}" id="main_search">
+        <input type="search" name="q" placeholder="{% if q %}{{ get.q }}{% else %} Введите название... {% endif %}"
+            id="main_search">
         <button class='btn_outline' type='submit'><svg width="24" height="24" viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -12,7 +13,7 @@
                     fill="#E2E5E9" />
             </svg>
         </button>
-        
+
     </div>
 </form>
 <div class="grid">
@@ -30,10 +31,7 @@
     {% endif %}
 
     <div class='ads area_top'>
-        <div>
-            <h1>ADS</h1>
-            <p>blahblahblabhlahb labhalbhalbhla hlabhlahblabhla albhlahbla</p>
-        </div>
+        <div></div>
     </div>
 </div>
 {% endblock content %}

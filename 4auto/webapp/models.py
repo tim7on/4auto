@@ -47,7 +47,7 @@ class Item(models.Model):
     category = models.ForeignKey(
         "webapp.Category", verbose_name=_("Категории"), on_delete=models.CASCADE)
     photo = models.ImageField(verbose_name=_(
-        "Фото"), upload_to="items_photo", null=True, blank=True)
+        "Фото"), upload_to="media/items_photo", null=True, blank=True)
     description = models.TextField(verbose_name=_("Описание"))
     price = models.DecimalField(verbose_name=_(
         'Цена'), max_digits=9, decimal_places=0)

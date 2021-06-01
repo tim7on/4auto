@@ -18,15 +18,18 @@
         </div>
     </div>
     {% endif %}
-
     {% if item.photo %}
+
     <img class="card_img" src="{{item.photo.url}}" alt="Photo of item">
     {% else %}
     <img class="card_img" src=" {% static 'img/no-image.jpg' %}" style="filter: brightness(0.5);" alt="No Image"
         srcset="">
     {% endif %}
-
     <div class="info">
+        <div class="views_info">
+            <p><small>{{ item.viewed}}</small></p>
+            <div class="svg viewed"></div>
+        </div>
         <h3>{{ item.name|truncatechars:29 }}</h3>
         <p>{{ item.description|truncatechars:105 }}</p>
         <br>
@@ -34,6 +37,7 @@
         <p><strong class="price">{{ item.price}}</strong> {{ item.currency}}</p>
         <p>{{item.updated|date:"d M Y" }}</p>
     </div>
+
     <a href="{{ item.get_absolute_url }}" class="btn_rght pad_off">Подробнее</a>
 </div>
 {% endfor %}

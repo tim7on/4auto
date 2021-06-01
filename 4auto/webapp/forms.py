@@ -5,4 +5,5 @@ from webapp.models import Item
 class ItemForm(forms.ModelForm):
     class Meta:
         model = Item
-        exclude = ['owner', 'updated', 'created']
+        fields = ['name', 'category', 'photo',
+                  'description', 'price', 'currency']

@@ -69,7 +69,7 @@ class Profile(models.Model):
     schedule = models.CharField(max_length=50, verbose_name=_(
         "Расписание"), null=True, blank=True)
     avatar = models.ImageField(
-        null=True, blank=True, upload_to='user_pics', verbose_name=_("Аватар"))
+        null=True, blank=True, upload_to='media/user_pics', verbose_name=_("Аватар"))
     phone = models.CharField(
         validators=[phone_regex], verbose_name="Телефон", max_length=16, blank=True, null=True)
     whats = models.CharField(

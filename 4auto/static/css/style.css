@@ -6,6 +6,7 @@
     --light: #E2E5E9;
     --lightTrans: #e2e5e98e;
     --accent: #FF9900;
+    --accentSecondary: #f8b756;
 }
 
 * {
@@ -23,7 +24,7 @@
 }
 
 a {
-    color: var(--accent);
+    color: var(--accentSecondary);
     text-decoration: none;
     transition: color 0.3s ease, background-color 0.3s ease-in;
 }
@@ -76,6 +77,10 @@ nav {
     background: var(--Background);
 }
 
+p {
+    margin-top: 0.30rem;
+}
+
 ul {
     list-style-type: none;
 }
@@ -113,7 +118,7 @@ img {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 8rem 1.5rem 1.5rem 1rem;
+    margin: 15rem 1.5rem 1.5rem 1rem;
 }
 
 #list_wrap .search_form .search_overlay {
@@ -452,9 +457,11 @@ img {
     min-height: 10.5rem;
     border-radius: 1rem;
 }
+
 .col2_grid .card {
     display: block;
 }
+
 .card_img {
     border-radius: 1rem 0rem 0rem 1rem;
     width: 6rem;
@@ -513,10 +520,6 @@ img {
     padding: 1rem;
 }
 
-.info_detail p {
-    margin-top: 0.25rem;
-}
-
 .area_top {
     grid-area: 1 / 1;
 }
@@ -535,12 +538,12 @@ img {
     text-align: center;
     bottom: 0;
     right: 0;
-    background-color: var(--accent);
+    background-color: var(--accentSecondary);
     color: var(--Background);
     padding: 1rem 1.5rem;
     border-radius: 1rem 0rem 1rem 0rem;
-    box-shadow: 0 0 0 0 var(--accent);
-    transition: box-shadow ease-in 300ms;
+    box-shadow: 0 0 0 0 var(--accentSecondary);
+    transition: box-shadow ease-in 300ms, background-color ease-in 300ms;
 }
 
 .search_form {
@@ -625,7 +628,8 @@ input[type=search]:focus {
 .btn_rght:focus {
     outline: none;
     box-shadow: 0 0 0.75rem 0 var(--accent);
-    transition: box-shadow ease-out 300ms;
+    background-color: var(--accent);
+    transition: box-shadow ease-in 300ms, background-color ease-in 300ms;
 }
 
 .sidebar {
@@ -657,7 +661,7 @@ input[type=search]:focus {
 .ads {
     width: 100%;
     height: 100%;
-    background: var(--lightDark);
+    /* background: var(--lightDark); */
     justify-content: center;
     border-radius: 1rem;
 
@@ -832,7 +836,7 @@ input[type=search]:focus {
 
 .btn_overlay:hover,
 .btn_overlay:focus {
-    --Background:  #ff99008e;
+    --Background: #ff99008e;
     box-shadow: 0 0 0.75rem 0 var(--Background);
     background: var(--Background);
     transition: box-shadow 250ms ease-out 250ms, background ease-out 250ms;
@@ -847,6 +851,32 @@ input[type=search]:focus {
     z-index: 2;
 }
 
+.svg {
+    display: block;
+    justify-content: center;
+    align-items: center;
+}
+.views_info p{
+    margin-top: 0.15rem;
+}
+.views_info {
+    position: absolute;
+    top: 0.45rem;
+    right: 0.25rem;
+    display: flex;
+    flex-direction: column-reverse;
+    width: max-content;
+    align-items: center;
+    z-index: 1;
+}
+
+.viewed {
+    width: 1.75rem;
+    height: 1.25rem;
+    margin: 0 0.15rem;
+    background: url(../svg/views.svg) no-repeat center;
+}
+
 .delete_btn {
     background: url(../svg/delete.svg) no-repeat center;
 
@@ -855,9 +885,11 @@ input[type=search]:focus {
 .edit_btn {
     background: url(../svg/edit.svg) no-repeat center;
 }
+
 .update_btn {
     background: url(../svg/update.svg) no-repeat center;
 }
+
 .panel {
     position: relative;
     align-self: center;

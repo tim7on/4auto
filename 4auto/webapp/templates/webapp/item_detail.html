@@ -17,8 +17,12 @@
             <div class="txt1">
                 <h2 class="txt2"><a class="link" href="{{ item.owner.profile.get_absolute_url }}">@{{ item.owner }}</a>
                 </h2>
-                <p class="txt2"> <strong>Адрес: </strong>{{ profile.adress}}</p>
-                <p class="txt2"><strong> Расписание: </strong>{{ profile.schedule }}</p>
+                {% if profile.adress %}
+                <p class="txt2"><strong>Адрес: </strong>{{profile.adress}}</p>
+                {% endif %}
+                {% if profile.schedule %}
+                <p class="txt2"><strong> Расписание: </strong>{{profile.schedule}}</p>
+                {% endif %}
             </div>
 
             <div class="cal">
@@ -39,8 +43,6 @@
 <div class="grid">
     <div class='ads'>
         <div>
-            <h2>ADS</h2>
-
         </div>
     </div>
     <div class="col2_grid">
@@ -54,7 +56,6 @@
             <div class="info_detail">
                 <h2>{{ item.name }}</h2>
                 <h3>Категория: <a href="{{ item.category.get_absolute_url }}">{{ item.category }}</a></h3>
-                <p>Теги: Скоро добавлю</p>
                 <br>
                 <p>{{ item.description }}</p>
                 <br>
@@ -74,8 +75,6 @@
     </div>
     <div class=' ads'>
             <div>
-                <h2>ADS</h2>
-                <p>blahblahblabhlahb labhalbhalbhla hlabhlahblabhla albhlahbla</p>
             </div>
         </div>
     </div>
