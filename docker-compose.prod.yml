@@ -2,9 +2,8 @@ version: '3.7'
 
 services:
   web:
-    build:
-      context: ./4auto
-      dockerfile: Dockerfile.prod
+    image: timsson/4auto:4auto
+    container_name: 4auto_web
     command: gunicorn main.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - static_volume:/code/static
@@ -17,17 +16,19 @@ services:
       - db
   db:
     image: postgres:12.0
+    container_name: 4auto_db
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
       - ./.prod.db.env
   nginx:
     build: ./nginx
+    container_name: 4auto_ngnix
     volumes:
       - static_volume:/code/static
       - media_volume:/code/media
     ports:
-      - 1337:80
+      - 80:80
     depends_on:
       - web    
 
