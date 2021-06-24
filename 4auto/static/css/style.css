@@ -918,7 +918,7 @@ input[type=search]:focus {
     flex-direction: column;
 }
 
-.panel p {
+.panel p:last-child {
     text-align: center;
     padding-top: 1rem;
     padding-bottom: 3rem;

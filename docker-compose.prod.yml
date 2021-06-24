@@ -2,7 +2,11 @@ version: '3.7'
 
 services:
   web:
-    image: timsson/4auto:4auto
+    # image: timsson/4auto:4auto
+    build:
+      context: ./4auto
+      args:
+        - RUN_DB_MIGRATIONS_ARG=yes
     container_name: 4auto_web
     command: gunicorn main.wsgi:application --bind 0.0.0.0:8000
     volumes:

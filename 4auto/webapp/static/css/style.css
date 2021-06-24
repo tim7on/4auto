@@ -856,9 +856,11 @@ input[type=search]:focus {
     justify-content: center;
     align-items: center;
 }
-.views_info p{
+
+.views_info p {
     margin-top: 0.15rem;
 }
+
 .views_info {
     position: absolute;
     top: 0.45rem;
@@ -921,6 +923,9 @@ input[type=search]:focus {
 .panel p {
     text-align: center;
     padding-top: 1rem;
+}
+
+.panel p:last-child {
     padding-bottom: 3rem;
 }
 

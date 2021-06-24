@@ -2,7 +2,7 @@ version: '3.7'
 services:
 
   web:
-    container_name: 4auto
+    container_name: 4auto_web
     build:
       context: ./4auto
       args:
