@@ -96,18 +96,20 @@ class ItemDetailView(DetailView):
         return item
 
 
-class ProfileDetailView(DetailView):
-    model = Profile
+class ProfileDetailView(ListView):
+    model = Item
     template_name = "webapp/profile.html"
     paginate_by = 6
 
-    def get_object(self, queryset=None):
-        return Profile.objects.get(user__username=self.kwargs.get("username"))
+    def get_queryset(self):
+        queryset = Item.objects.filter(owner__username=self.kwargs['username'])
+        return queryset
 
     def get_context_data(self, **kwargs):
         context = super(ProfileDetailView, self).get_context_data(**kwargs)
-        context['object_list'] = Item.objects.filter(
-            owner__username=self.kwargs['username']).order_by('-updated')
+        context['profile'] = Profile.objects.get(
+            user__username=self.kwargs.get("username"))
+        context['items'] = self.get_queryset().order_by('-updated')
         return context
 
 

@@ -35,13 +35,21 @@
                     <a class="cal_svg{% if profile.whats %} cal_svg_active {% else %} cal_svg_none {% endif %}"
                         id="cal_whats" href="https://wa.me/{{ profile.whats }}"
                         data-title="{{ profile.whats }}"" target=" _blank" rel="noopener noreferrer"></a>
+                    {% if request.user.username == profile.user.username %}
                     <a class="cal_svg cal_svg_active" id="cal_new"
                         href="{% url 'item_create' request.user.username %}"></a>
+                    {% endif %}
+
+
                 </div>
             </div>
         </div>
         {% include 'partial/items.html' %}
+
     </div>
+    {% if is_paginated %}
+    {% include 'partial/pagination.html' %}
+    {% endif %}
     <div class='ads'>
         <div></div>
     </div>
