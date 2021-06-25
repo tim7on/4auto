@@ -6,8 +6,8 @@ services:
     container_name: 4auto_web
     command: gunicorn main.wsgi:application --bind 0.0.0.0:8000
     volumes:
-      - static_volume:/code/static
-      - media_volume:/code/media
+      - static_volume:/usr/src/app/static
+      - media_volume:/usr/src/app/media
     expose:
       - 8000
     env_file:
@@ -25,8 +25,8 @@ services:
     build: ./nginx
     container_name: 4auto_ngnix
     volumes:
-      - static_volume:/code/static
-      - media_volume:/code/media
+      - static_volume:/usr/src/app/static
+      - media_volume:/usr/src/app/media
     ports:
       - 80:80
     depends_on:
