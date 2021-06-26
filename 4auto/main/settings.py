@@ -149,3 +149,19 @@ BASE_HOST = os.environ.get('BASE_HOST', 'localhost:8000')
 #         'rest_framework.permissions.AllowAny',
 #     ),
 # }
+#     SSL SETUP AND OTHERS
+
+# CORS_REPLACE_HTTPS_REFERER = int(
+#     os.environ.get('CORS_REPLACE_HTTPS_REFERER'))
+# HOST_SCHEME = os.environ.get('HOST_SCHEME')
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# SECURE_SSL_REDIRECT = int(os.environ.get('SECURE_SSL_REDIRECT'))
+# SESSION_COOKIE_SECURE = int(os.environ.get('SESSION_COOKIE_SECURE'))
+# CSRF_USE_SESSIONS = int(os.environ.get('CSRF_USE_SESSIONS'))
+# CSRF_COOKIE_SECURE = int(os.environ.get('CSRF_COOKIE_SECURE'))
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = int(
+#     os.environ.get('SECURE_HSTS_INCLUDE_SUBDOMAINS'))
+# SECURE_HSTS_SECONDS = 10000
+# SECURE_HSTS_PRELOAD = int(os.environ.get('SECURE_HSTS_PRELOAD'))
+# SECURE_FRAME_DENY = int(os.environ.get('SECURE_FRAME_DENY'))
