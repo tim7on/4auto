@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Added apps
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
     'rest_framework',
     'widget_tweaks',
     'mptt',
@@ -46,6 +48,7 @@ INSTALLED_APPS = [
     'accounts',
     'webapp',
 ]
+SITE_ID=1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

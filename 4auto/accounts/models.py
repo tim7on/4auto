@@ -10,9 +10,10 @@ from django.core.validators import RegexValidator
 from django.utils.translation import ugettext_lazy as _
 from django.urls import reverse
 
+User._meta.get_field('email').null = False
 User._meta.get_field('email')._unique = True
 User._meta.get_field('email').blank = False
-User._meta.get_field('email').null = False
+# DO =>   ALTER TABLE auth_user ADD UNIQUE (email)
 
 TOKEN_TYPE_REGISTER = 'register'
 TOKEN_TYPE_PASSWORD_RESET = 'password_reset'

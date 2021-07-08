@@ -4,11 +4,19 @@ from django.contrib import admin
 from django.urls import path, include
 from webapp.views import *
 from django.urls import reverse
+from django.contrib.sitemaps.views import sitemap
+from webapp.sitemaps import ItemSitemap, CategorySitemap
+
+sitemaps = {
+    'items': ItemSitemap,
+    'category': CategorySitemap
+}
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
-    path('u/<slug:username>/create/', ItemCreateView.as_view(), name='item_create'),
+    path('u/<slug:username>/create/',
+         ItemCreateView.as_view(), name='item_create'),
 
     path('', IndexView.as_view(), name='index'),
     path('search/', Search.as_view(), name='search'),
@@ -19,11 +27,17 @@ urlpatterns = [
     path('category/<slug:subcategory>/',
          CategoryListView.as_view(), name='category'),
 
-    path('u/<str:owner>/item/<int:pk>/', ItemDetailView.as_view(), name='item_view'),
-    path('u/<str:owner>/item/<int:pk>/update/', ItemUpdateView.as_view(), name='item_update'),
-    path('u/<str:owner>/item/<int:pk>/up/', ItemUpUpdateView.as_view(), name='item_up'),
-    path('u/<str:owner>/item/<int:pk>/delete/', ItemDeleteView.as_view(), name='item_delete'),
-    
+    path('u/<str:owner>/item/<int:pk>/',
+         ItemDetailView.as_view(), name='item_view'),
+    path('u/<str:owner>/item/<int:pk>/update/',
+         ItemUpdateView.as_view(), name='item_update'),
+    path('u/<str:owner>/item/<int:pk>/up/',
+         ItemUpUpdateView.as_view(), name='item_up'),
+    path('u/<str:owner>/item/<int:pk>/delete/',
+         ItemDeleteView.as_view(), name='item_delete'),
+         
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps})
+
 ]
 
 # if settings.DEBUG:
