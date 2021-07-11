@@ -10,6 +10,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import View, FormView, DetailView, CreateView, UpdateView
 from django.conf import settings
+from django.contrib import messages
 
 from accounts.forms import MyUserCreationForm, UserChangeForm, ProfileChangeForm, \
     PasswordChangeForm, PasswordResetEmailForm, PasswordResetForm
@@ -25,7 +26,7 @@ class RegisterView(CreateView):
     def form_valid(self, form):
         user = form.save()
         if settings.ACTIVATE_USERS_EMAIL:
-            return redirect('index')
+            return render(self.request, 'after_reg.html', self.get_context_data())
         else:
             login(self.request, user)
             return redirect(self.get_success_url())
@@ -110,7 +111,6 @@ class UserChangeView(UserPassesTestMixin, UpdateView):
         return ProfileChangeForm(**form_kwargs)
 
 
-
 class UserPasswordChangeView(LoginRequiredMixin, UpdateView):
     model = get_user_model()
     template_name = 'user_password_change.html'
@@ -132,11 +132,13 @@ class UserPasswordChangeView(LoginRequiredMixin, UpdateView):
 class UserPasswordResetEmailView(FormView):
     form_class = PasswordResetEmailForm
     template_name = 'password_reset_email.html'
-    success_url = reverse_lazy('index')
+    # success_url = reverse_lazy('index')
 
     def form_valid(self, form):
         form.send_email()
-        return super().form_valid(form)
+        # super().form_valid(form)
+        messages.success(self.request, "Your password is changed")
+        return render(self.request, 'after_email.html', self.get_context_data())
 
 
 class UserPasswordResetView(UpdateView):

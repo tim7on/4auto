@@ -31,15 +31,15 @@ class MyUserCreationForm(UserCreationForm):
 
     def send_email(self, user, token):
         if user.email:
-            subject = 'Вы создали учётную запись на сайте "Мой Блог"'
+            subject = 'Вы создали учётную запись на сайте "4auto.kg"'
             link = settings.BASE_HOST + \
                 reverse('accounts:activate', kwargs={'token': token.token})
             message = f'''Здравствуйте, {user.username}!
-Вы создали учётную запись на сайте "Мой Блог"
+Вы создали учётную запись на сайте "4auto.kg"
 Активируйте её, перейдя по ссылке {link}.
 Если вы считаете, что это ошибка, просто игнорируйте это письмо.'''
             html_message = f'''Здравствуйте, {user.username}!
-Вы создали учётную запись на сайте "Мой Блог"
+Вы создали учётную запись на сайте "4auto.kg"
 Активируйте её, перейдя по ссылке <a href="{link}">{link}</a>.
 Если вы считаете, что это ошибка, просто игнорируйте это письмо.'''
             try:
@@ -127,7 +127,7 @@ class PasswordResetEmailForm(forms.Form):
         token = AuthToken.objects.create(
             user=user, life_days=3, type=TOKEN_TYPE_PASSWORD_RESET)
 
-        subject = 'Вы запросили восстановление пароля для учётной записи на сайте "Мой Блог"'
+        subject = 'Восстановление пароля для учётной записи на сайте "4auto.kg"'
         link = settings.BASE_HOST + \
             reverse('accounts:password_reset', kwargs={'token': token.token})
         message = f'''Ваша ссылка для восстановления пароля: {link}.

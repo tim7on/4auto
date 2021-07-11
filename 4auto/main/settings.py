@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'accounts',
     'webapp',
 ]
-SITE_ID=1
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -138,9 +138,17 @@ LOGOUT_REDIRECT_URL = 'index'
 LOGIN_URL = 'accounts:login'
 
 # docker-compose logs -f (Смотреть логи)
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-ACTIVATE_USERS_EMAIL = int(os.environ.get('ACTIVATE_USERS_EMAIL', 1))
 BASE_HOST = os.environ.get('BASE_HOST', 'localhost:8000')
+EMAIL_BACKEND = os.environ.get(
+    "EMAIL_BACKEND", 'django.core.mail.backends.console.EmailBackend')
+ACTIVATE_USERS_EMAIL = int(os.environ.get('ACTIVATE_USERS_EMAIL', 1))
+EMAIL_HOST = os.environ.get("EMAIL_HOST")
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+EMAIL_PORT = os.environ.get("EMAIL_PORT")
+EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS")
+DEFAULT_FROM_EMAIL='4auto.kg <4autokg@gmail.com>'
+
 
 # REST_FRAMEWORK = {
 #     'DEFAULT_AUTHENTICATION_CLASSES': (
