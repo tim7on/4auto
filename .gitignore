@@ -9,3 +9,4 @@ static
 .dev.env
 .prod.db.env
 .prod.env
+mailcow.conf

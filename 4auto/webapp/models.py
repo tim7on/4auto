@@ -3,6 +3,7 @@ from mptt.models import MPTTModel, TreeForeignKey
 from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
 from django.urls import reverse
+from django.core.validators import RegexValidator
 
 
 class Category(MPTTModel):
@@ -41,6 +42,13 @@ CURRENCY_TYPE_CHOICES = (
 
 
 class Item(models.Model):
+    phone_regex = RegexValidator(
+        regex=r'^\+?1?\d{12,15}$', message="Телефон должен быть в формате: '+996XXXXXXXXX'.")
+    insta_regex = RegexValidator(
+        regex=r'(^[A-Za-z0-9_](?:(?:[A-Za-z0-9_]|(?:\.(?!\.))){0,28}(?:[A-Za-z0-9_]))?)'
+        # regex=r'([A-Za-z0-9_](?:(?:[A-Za-z0-9_]|(?:\.(?!\.))){0,28}(?:[A-Za-z0-9_]))?)'
+    )
+
     owner = models.ForeignKey(get_user_model(), verbose_name=_(
         "Владелец"), on_delete=models.CASCADE)
     name = models.CharField(verbose_name=_("Название"), max_length=50)
@@ -56,6 +64,12 @@ class Item(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(null=True, blank=True)
     viewed = models.IntegerField(default=0, verbose_name=_("Просмотры"))
+    phone = models.CharField(
+        validators=[phone_regex], verbose_name="Телефон", max_length=16, blank=True, null=True)
+    whats = models.CharField(
+        validators=[phone_regex], verbose_name="Whatsapp", max_length=16, blank=True, null=True)
+    insta = models.CharField(
+        validators=[insta_regex], verbose_name="Instagram", max_length=31, blank=True, null=True)
 
     class Meta:
         verbose_name = 'Товар'
@@ -66,5 +80,3 @@ class Item(models.Model):
 
     def get_absolute_url(self):
         return reverse('item_view', kwargs={'owner': self.owner, 'pk': self.pk})
-
-

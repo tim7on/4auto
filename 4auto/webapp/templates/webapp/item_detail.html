@@ -59,6 +59,18 @@
                 <br>
                 <p>{{ item.description }}</p>
                 <br>
+                {% if item.phone or item.whats or item.insta  %}
+                {% if item.phone %}
+                <p><strong>Телефон:</strong> {{item.phone}}</p>
+                {% endif %}
+                {% if item.whats %}
+                <p><strong>Whatsapp:</strong> {{item.phone}}</p>
+                {% endif %}
+                {% if item.phone %}
+                <p><strong>instagram:</strong> @{{item.insta}}</p>
+                {% endif %}
+                {% endif %}
+                <br>
                 <hr>
                 <br>
                 <p> Цена: <strong class="price">{{ item.price}}</strong> {{ item.currency}}</p>

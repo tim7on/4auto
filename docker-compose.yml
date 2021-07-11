@@ -16,6 +16,7 @@ services:
       - ./.dev.env    
     depends_on:
       - db
+
   db:
     container_name: postgre
     image: postgres:12.0
@@ -25,6 +26,7 @@ services:
       - postgres_data:/var/lib/postgresql/data/
     ports:  
       - '5432:5432'
+
 networks:
   postgres:
     driver: bridge
