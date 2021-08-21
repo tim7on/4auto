@@ -146,8 +146,9 @@ EMAIL_HOST = os.environ.get("EMAIL_HOST")
 EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = os.environ.get("EMAIL_PORT")
-EMAIL_USE_TLS = int(os.environ.get('ACTIVATE_USERS_EMAIL', 0))
-DEFAULT_FROM_EMAIL='4auto.kg <4autokg@gmail.com>'
+EMAIL_USE_TLS = int(os.environ.get('EMAIL_USE_TLS', 0))
+EMAIL_USE_SSL = int(os.environ.get('EMAIL_USE_SSL', 1))
+DEFAULT_FROM_EMAIL='"4auto Все для Авто" <noreply@4auto.kg>'
 
 
 # REST_FRAMEWORK = {
